@@ -2,6 +2,7 @@ package com.diplomproject.barbecueshop.services;
 
 
 import com.diplomproject.barbecueshop.model.GenericModel;
+import com.diplomproject.barbecueshop.model.Order;
 import com.diplomproject.barbecueshop.repository.GenericRepository;
 import org.springframework.stereotype.Service;
 import org.webjars.NotFoundException;
@@ -12,7 +13,7 @@ import java.util.List;
 public abstract class GenericService<T extends GenericModel> {
 
     private final GenericRepository<T> repository;
-    @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
+   @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
     protected GenericService(GenericRepository<T> repository) {
         this.repository = repository;
     }

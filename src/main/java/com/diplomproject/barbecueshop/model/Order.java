@@ -3,7 +3,6 @@ package com.diplomproject.barbecueshop.model;
 import lombok.*;
 
 import javax.persistence.*;
-import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.time.LocalDateTime;
 
@@ -28,7 +27,7 @@ public class Order extends GenericModel{
     private LocalDateTime deliveryDateTime;
 
 
-    @SuppressWarnings("JpaDataSourceORMInspection")
+   // @SuppressWarnings("JpaDataSourceORMInspection")
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL) // добавил каскад тип
     @JoinColumn(
             name = "delivery_order_id",
@@ -44,13 +43,20 @@ public class Order extends GenericModel{
     @Column(name = "cost")
     private DecimalFormat cost;
 
-
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(
             name = "user_id",
             foreignKey = @ForeignKey(name = "FK_USERS_PRODUCTS")
     )
     private User user;
+
+
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(
+            name = "provider_id",
+            foreignKey = @ForeignKey(name = "FK_PROVIDERS_PRODUCTS")
+    )
+    private Provider provider;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(
@@ -61,15 +67,16 @@ public class Order extends GenericModel{
 
     @Builder
 
-    public Order(Long id, LocalDateTime orderDateTime, LocalDateTime deliveryDateTime, DeliveryOrder deliveryOrder, boolean purchase, DecimalFormat cost, User user, Product product) {
+    public Order(Long id, LocalDateTime orderDateTime, LocalDateTime deliveryDateTime, DeliveryOrder deliveryOrder, boolean purchase, DecimalFormat cost, User user, Provider provider, Product product) {
         super(id);
         this.orderDateTime = orderDateTime;
         this.deliveryDateTime = deliveryDateTime;
         this.deliveryOrder = deliveryOrder;
         this.purchase = purchase;
         this.cost = cost;
-        this.user = user;
+        this.provider = provider;
         this.product = product;
+        this.user = user;
     }
 
 }

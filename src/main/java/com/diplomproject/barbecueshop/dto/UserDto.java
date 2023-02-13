@@ -3,6 +3,8 @@ package com.diplomproject.barbecueshop.dto;
 
 import lombok.*;
 
+import java.util.Set;
+
 @Getter
 @Setter
 @Builder
@@ -10,7 +12,7 @@ import lombok.*;
 @AllArgsConstructor
 public class UserDto extends GenericDto{
 
- //   private RoleDto role;
+    private RoleDto role;
     private String name;
     private String surname;
     private String login;
@@ -19,4 +21,6 @@ public class UserDto extends GenericDto{
     private String email;
     private String phone;
     private String address;
+
+
 }

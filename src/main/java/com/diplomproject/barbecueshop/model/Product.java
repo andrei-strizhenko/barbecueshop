@@ -1,12 +1,11 @@
 package com.diplomproject.barbecueshop.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
-import org.springframework.data.relational.core.sql.NumericLiteral;
 
 import javax.persistence.*;
-import java.text.DecimalFormat;
-import java.text.DecimalFormatSymbols;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -32,14 +31,14 @@ public class Product extends GenericModel {
     private String description;
 
     @Column(name = "cost")
-    private DecimalFormat cost;
+    private double cost;
 
  //   @Column(name = "genre")
  //   @Enumerated
  //   private Genre genre;
 
     @Column(name = "discount")
-    private String discount;
+    private double discount;
 
     @Column(name = "image")
     private String image;
@@ -52,17 +51,17 @@ public class Product extends GenericModel {
 
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
-    // @JsonIgnore // убирает рекурсию
+     @JsonIgnore // убирает рекурсию
     @JoinTable(
-            name = "products_users",
+            name = "products_providers",
             joinColumns = @JoinColumn(name = "product_id"),
-            foreignKey = @ForeignKey(name = "FK_PRODUCTS_USERS"),
-            inverseJoinColumns = @JoinColumn(name = "user_id"),
-            inverseForeignKey = @ForeignKey(name = "FK_USERS_PRODUCTS"))
-    private Set<User> users = new HashSet<>();
+            foreignKey = @ForeignKey(name = "FK_PRODUCTS_PROVIDERS"),
+            inverseJoinColumns = @JoinColumn(name = "provider_id"),
+            inverseForeignKey = @ForeignKey(name = "FK_PROVIDERS_PRODUCTS"))
+    private Set<Provider> providers = new HashSet<>();
 
     @Builder
-    public Product(Long id, String title, String description, DecimalFormat cost, String discount, String image, Long available, Long ordered, Set<User> users) {
+    public Product(Long id, String title, String description, double cost, double discount, String image, Long available, Long ordered, Set<Provider> providers) {
         super(id);
         this.title = title;
         this.description = description;
@@ -71,6 +70,6 @@ public class Product extends GenericModel {
         this.image = image;
         this.available = available;
         this.ordered = ordered;
-        this.users = users;
+        this.providers = providers;
     }
 }

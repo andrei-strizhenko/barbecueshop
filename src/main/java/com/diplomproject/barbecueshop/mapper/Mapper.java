@@ -1,7 +1,5 @@
 package com.diplomproject.barbecueshop.mapper;
 
-
-
 import com.diplomproject.barbecueshop.dto.GenericDto;
 import com.diplomproject.barbecueshop.model.GenericModel;
 import org.springframework.stereotype.Component;

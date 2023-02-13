@@ -45,7 +45,6 @@ public class User extends GenericModel {
     @Column(name = "email")
     private String email;
 
-
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL) // добавил каскад тип
     @JoinColumn(
             name = "role_id",
@@ -53,11 +52,7 @@ public class User extends GenericModel {
     )
     private Role role;
 
-
-
-
-
-    @SuppressWarnings("JpaDataSourceORMInspection")
+   // @SuppressWarnings("JpaDataSourceORMInspection")
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(
             name = "delivery_order_id",
@@ -65,9 +60,6 @@ public class User extends GenericModel {
     )
     private DeliveryOrder deliveryOrder;
 
-
- //   @ManyToOne(mappedBy = "users")
-//    private Set<Order> orders;
 
     @Override
     public String toString() {
@@ -81,6 +73,7 @@ public class User extends GenericModel {
                 ", address='" + address + '\'' +
                 ", email='" + email + '\'' +
                 ", role=" + role.getId() +
+                ", deliveryOrder=" + deliveryOrder +
                 '}';
     }
 
