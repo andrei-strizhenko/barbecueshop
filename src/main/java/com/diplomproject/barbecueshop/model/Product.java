@@ -31,14 +31,14 @@ public class Product extends GenericModel {
     private String description;
 
     @Column(name = "cost")
-    private double cost;
+    private Double cost;
 
  //   @Column(name = "genre")
  //   @Enumerated
  //   private Genre genre;
 
     @Column(name = "discount")
-    private double discount;
+    private Double discount;
 
     @Column(name = "image")
     private String image;
@@ -48,6 +48,17 @@ public class Product extends GenericModel {
 
     @Column(name = "ordered")
     private Long ordered;
+
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+      @JsonIgnore  // убирает рекурсию пока нет ДТО
+    @JoinTable(
+            name = "orders_products",
+            joinColumns = @JoinColumn(name ="product_id"),
+            foreignKey = @ForeignKey(name = "FK_PRODUCTS_ORDERS"),
+            inverseJoinColumns = @JoinColumn(name ="order_id"),
+            inverseForeignKey = @ForeignKey(name = "FK_ORDERS_PRODUCTS")
+    )
+    private Set<Order> orders= new HashSet<>();
 
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
@@ -61,7 +72,7 @@ public class Product extends GenericModel {
     private Set<Provider> providers = new HashSet<>();
 
     @Builder
-    public Product(Long id, String title, String description, double cost, double discount, String image, Long available, Long ordered, Set<Provider> providers) {
+    public Product(Long id, String title, String description, double cost, double discount, String image, Long available, Long ordered, Set<Provider> providers, Set<Order> orders) {
         super(id);
         this.title = title;
         this.description = description;
@@ -71,5 +82,17 @@ public class Product extends GenericModel {
         this.available = available;
         this.ordered = ordered;
         this.providers = providers;
+        this.orders = orders;
     }
+
+   // @ManyToOne(optional = false)
+  //  private Order orders;
+
+  /*  public Order getOrders() {
+        return orders;
+    }
+
+    public void setOrders(Order orders) {
+        this.orders = orders;
+    }*/
 }

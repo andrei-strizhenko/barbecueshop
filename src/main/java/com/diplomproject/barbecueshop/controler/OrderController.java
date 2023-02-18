@@ -1,14 +1,16 @@
 package com.diplomproject.barbecueshop.controler;
 
+import com.diplomproject.barbecueshop.dto.AddProductInOrderDto;
 import com.diplomproject.barbecueshop.dto.AddUserInOrderDto;
-import com.diplomproject.barbecueshop.dto.BuyProductDto;
 import com.diplomproject.barbecueshop.dto.CreateNewOrderDto;
-
 import com.diplomproject.barbecueshop.dto.OrderDto;
 import com.diplomproject.barbecueshop.mapper.OrderMapper;
 import com.diplomproject.barbecueshop.model.Order;
 import com.diplomproject.barbecueshop.services.OrderService;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/rest/order")
@@ -23,22 +25,20 @@ public class OrderController extends GenericController<Order, OrderDto> {
         this.mapper = mapper;
     }
 
-    //  @PostMapping("buy-product")
-    //  public OrderDto buyProduct(@RequestBody BuyProductDto buyProductDto) {
-//        return mapper.toDto(service.buyProduct(buyProductDto));
-    //   }
-
-    //   @GetMapping("user-ordering/{userId}")
-    //   public List<OrderDto> getUserOrdering(@PathVariable Long userId) {
-    //       return mapper.toDtos(service.getUserOrdering(userId));
-//    }
-
     // создаем новый заказ(в заказе только Id и время создания):
     @PostMapping("create-new-order")
     public Order createNewOrder(@RequestBody CreateNewOrderDto createNewOrderDto) {
      //   return mapper.toDto(service.createNewOrder(createNewOrderDto));
         return service.createNewOrder(createNewOrderDto);
     }
+
+    //добавляем продукт в заказ
+    @PostMapping("add-product-in-order")
+    public OrderDto addProductInOrder(@RequestBody AddProductInOrderDto addProductInOrderDto) {
+        return mapper.toDto(service.addProductInOrder(addProductInOrderDto));
+    }
+
+
 
     //добавляем пользователя в заказ
     @PostMapping("add-user-in-order")

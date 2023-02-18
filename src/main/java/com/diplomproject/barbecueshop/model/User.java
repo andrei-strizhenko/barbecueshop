@@ -60,6 +60,8 @@ public class User extends GenericModel {
     )
     private DeliveryOrder deliveryOrder;
 
+    @OneToMany(mappedBy = "user")
+    private Set<Order> orders;
 
     @Override
     public String toString() {

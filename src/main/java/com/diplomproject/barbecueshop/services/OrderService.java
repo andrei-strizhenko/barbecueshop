@@ -1,9 +1,9 @@
 package com.diplomproject.barbecueshop.services;
 
+import com.diplomproject.barbecueshop.dto.AddProductInOrderDto;
 import com.diplomproject.barbecueshop.dto.AddUserInOrderDto;
 import com.diplomproject.barbecueshop.dto.BuyProductDto;
 import com.diplomproject.barbecueshop.dto.CreateNewOrderDto;
-import com.diplomproject.barbecueshop.dto.OrderDto;
 import com.diplomproject.barbecueshop.model.Order;
 import com.diplomproject.barbecueshop.model.Product;
 import com.diplomproject.barbecueshop.model.User;
@@ -11,7 +11,7 @@ import com.diplomproject.barbecueshop.repository.OrderRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.List;
+import java.util.Set;
 
 @Service
 public class OrderService extends GenericService<Order> {
@@ -38,46 +38,70 @@ public class OrderService extends GenericService<Order> {
                 //        .rentPeriod(rentBookDto.getRentPeriod())
                 //         .amount(rentBookDto.getAmount())
                 .user(user)
-                .product(product)
+               // .product(product)
                 .build();
         return orderRepository.save(order);
     }
 
-    public List<Order> getUserOrdering(Long userId) {
-        return (List<Order>) userService.getOne(userId).getDeliveryOrder();
+    public Set<Order> getUserOrdering(Long userId) {
+        return (Set<Order>) userService.getOne(userId).getDeliveryOrder();
     }
 
     // создаем новый заказ(в заказе только Id и время создания):
     public Order createNewOrder(CreateNewOrderDto createNewOrderDto) {
 
-        // User user = userService.getOne(rentBookDto.getUserId());
-        // Product product = bookService.getOne(rentBookDto.getBookId());
-        //  Order order = orderService.getOne(OrderDto);
-
         Order order = Order.builder()
+                .total(0.0)
                 .orderDateTime(LocalDateTime.now())
                 .build();
         return orderRepository.save(order);
 
     }
+    //добавляем продукт в заказ
+    public Order addProductInOrder(AddProductInOrderDto addProductInOrderDto) {
+        Product product = productService.getOne(addProductInOrderDto.getProductId());
+        Order order = getOne(addProductInOrderDto.getOrderId());
+        if(order.getOrderDateTime() != null) {
+            order.setOrderDateTime(order.getOrderDateTime());
+        } else{
+            order.setOrderDateTime(LocalDateTime.now());
+        }
+        order.getProducts().add(product);
+        System.out.println(addProductInOrderDto.getTotal());
+        System.out.println(order.getTotal());
+        System.out.println(product.getCost());
 
-    //добавляем пользователя в заказ
-    public Order addUserInOrder(AddUserInOrderDto addUserInOrderDto) {
-        User user = userService.getOne(addUserInOrderDto.getUserId());
-        //   Product product = productService.getOne(buyProductDto.getProductId());
-        Order order = getOne(addUserInOrderDto.getOrderId());
+    //   addProductInOrderDto.getTotal(order.getTotal() + product.getCost());
+        order.setTotal(order.getTotal() + product.getCost());
 
-         Order.builder()
+
+        Order.builder()
                 //          .rentDate(LocalDateTime.now())
                 //         .returned(false)
                 //         .returnDate(LocalDateTime.now().plusMonths(rentBookDto.getRentPeriod()))
                 //        .rentPeriod(rentBookDto.getRentPeriod())
                 //         .amount(rentBookDto.getAmount())
-                .user(user)
+               // .products(products)
                 //  .product(product)
+               .orderDateTime(addProductInOrderDto.getDeliveryDateTime())
+         //      .total(addProductInOrderDto.getTotal() - product.getCost())           //product.getCost())
+
+                //   .userId(addUserInOrderDto.getUserId())
+
                 .build();
 
-        return orderRepository.save(order);
+        return update(order);
+    }
+
+    //добавляем пользователя в заказ
+    public Order addUserInOrder(AddUserInOrderDto addUserInOrderDto) {
+        User user = userService.getOne(addUserInOrderDto.getUserId());
+        Order order = getOne(addUserInOrderDto.getOrderId());
+        order.setUser(user);
+        order.setUserSurname(user.getSurname());
+
+
+        return update(order);
     }
 
 

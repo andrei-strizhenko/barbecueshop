@@ -1,10 +1,12 @@
 package com.diplomproject.barbecueshop.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
-import java.text.DecimalFormat;
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "orders")
@@ -15,6 +17,7 @@ import java.time.LocalDateTime;
 @SequenceGenerator(name = "default_generator", sequenceName = "orders_seq", allocationSize = 1)
 
 public class Order extends GenericModel{
+
 
     //  @Id
     //   @Column(name = "id")
@@ -36,47 +39,48 @@ public class Order extends GenericModel{
     private DeliveryOrder deliveryOrder;
 
 
-
     @Column(name = "purchase")
     private boolean purchase;
 
-    @Column(name = "cost")
-    private DecimalFormat cost;
+    @Column(name = "total")
+  //  private DecimalFormat total;
+    private Double total;
+
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(
             name = "user_id",
-            foreignKey = @ForeignKey(name = "FK_USERS_PRODUCTS")
+            foreignKey = @ForeignKey(name = "FK_USER_PRO")
     )
     private User user;
 
+    @Column(name = "user_surname")
+    private String userSurname;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(
-            name = "provider_id",
-            foreignKey = @ForeignKey(name = "FK_PROVIDERS_PRODUCTS")
-    )
-    private Provider provider;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(
-            name = "product_id",
-            foreignKey = @ForeignKey(name = "FK_PRODUCTS_USERS")
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonIgnore  // убирает рекурсию пока нет ДТО
+    @JoinTable(
+            name = "orders_products",
+            joinColumns = @JoinColumn(name ="order_id" ),
+            foreignKey = @ForeignKey(name = "FK_ORDERS_PRODUCTS"),
+            inverseJoinColumns = @JoinColumn(name ="product_id"),
+            inverseForeignKey = @ForeignKey(name = "FK_PRODUCTS_ORDERS")
     )
-    private Product product;
+    private Set<Product> products= new HashSet<>();
 
     @Builder
 
-    public Order(Long id, LocalDateTime orderDateTime, LocalDateTime deliveryDateTime, DeliveryOrder deliveryOrder, boolean purchase, DecimalFormat cost, User user, Provider provider, Product product) {
+    public Order(Long id, LocalDateTime orderDateTime, LocalDateTime deliveryDateTime, DeliveryOrder deliveryOrder, boolean purchase, Double total, User user, String userSurname, Set<Product> products) {
         super(id);
         this.orderDateTime = orderDateTime;
         this.deliveryDateTime = deliveryDateTime;
         this.deliveryOrder = deliveryOrder;
         this.purchase = purchase;
-        this.cost = cost;
-        this.provider = provider;
-        this.product = product;
+        this.total = total;
+        this.products = products;
         this.user = user;
+        this.userSurname = userSurname;
     }
 
 }
