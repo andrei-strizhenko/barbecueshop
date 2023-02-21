@@ -4,10 +4,6 @@ package com.diplomproject.barbecueshop.model;
 import lombok.*;
 
 import javax.persistence.*;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Collection;
-import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -53,7 +49,7 @@ public class User extends GenericModel {
     private Role role;
 
    // @SuppressWarnings("JpaDataSourceORMInspection")
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+  /*  @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(
             name = "delivery_order_id",
             foreignKey = @ForeignKey(name = "FK_USERS_DELIVERY_ORDER")
@@ -61,7 +57,7 @@ public class User extends GenericModel {
     private DeliveryOrder deliveryOrder;
 
     @OneToMany(mappedBy = "user")
-    private Set<Order> orders;
+    private Set<Order> orders;*/
 
     @Override
     public String toString() {
@@ -75,13 +71,13 @@ public class User extends GenericModel {
                 ", address='" + address + '\'' +
                 ", email='" + email + '\'' +
                 ", role=" + role.getId() +
-                ", deliveryOrder=" + deliveryOrder +
+            //    ", deliveryOrder=" + deliveryOrder +
                 '}';
     }
 
     @Builder
     public User(Long id, String login, String password, String name, String surname,
-                String birthDate, String phone, String address, String email, Role role, DeliveryOrder deliveryOrder) {
+                String birthDate, String phone, String address, String email, Role role) {
         super(id);
         this.login = login;
         this.password = password;
@@ -92,7 +88,7 @@ public class User extends GenericModel {
         this.address = address;
         this.email = email;
         this.role = role;
-        this.deliveryOrder = deliveryOrder;
+      //  this.deliveryOrder = deliveryOrder;
        // this.orders = orders;
 
     }

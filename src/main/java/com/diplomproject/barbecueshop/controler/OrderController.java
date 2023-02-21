@@ -2,7 +2,6 @@ package com.diplomproject.barbecueshop.controler;
 
 import com.diplomproject.barbecueshop.dto.AddProductInOrderDto;
 import com.diplomproject.barbecueshop.dto.AddUserInOrderDto;
-import com.diplomproject.barbecueshop.dto.CreateNewOrderDto;
 import com.diplomproject.barbecueshop.dto.OrderDto;
 import com.diplomproject.barbecueshop.mapper.OrderMapper;
 import com.diplomproject.barbecueshop.model.Order;
@@ -27,9 +26,9 @@ public class OrderController extends GenericController<Order, OrderDto> {
 
     // создаем новый заказ(в заказе только Id и время создания):
     @PostMapping("create-new-order")
-    public Order createNewOrder(@RequestBody CreateNewOrderDto createNewOrderDto) {
+    public Order createNewOrder(@RequestBody Order order) {
      //   return mapper.toDto(service.createNewOrder(createNewOrderDto));
-        return service.createNewOrder(createNewOrderDto);
+        return service.createNewOrder(order);
     }
 
     //добавляем продукт в заказ
@@ -39,10 +38,11 @@ public class OrderController extends GenericController<Order, OrderDto> {
     }
 
 
-
     //добавляем пользователя в заказ
     @PostMapping("add-user-in-order")
      public OrderDto addUserInOrder(@RequestBody AddUserInOrderDto addUserInOrderDto) {
        return mapper.toDto(service.addUserInOrder(addUserInOrderDto));
        }
+
+
 }

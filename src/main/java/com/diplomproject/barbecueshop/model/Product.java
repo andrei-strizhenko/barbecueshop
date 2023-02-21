@@ -1,13 +1,9 @@
 package com.diplomproject.barbecueshop.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
-
-import java.util.HashSet;
-import java.util.Set;
 
 
 @Entity
@@ -37,19 +33,19 @@ public class Product extends GenericModel {
  //   @Enumerated
  //   private Genre genre;
 
-    @Column(name = "discount")
-    private Double discount;
+  //  @Column(name = "discount")
+ //   private Double discount;
 
-    @Column(name = "image")
-    private String image;
+  //  @Column(name = "image")
+ //   private String image;
 
-    @Column(name = "available")
-    private Long available;
+  //  @Column(name = "available")
+  //  private Long available;
 
-    @Column(name = "ordered")
-    private Long ordered;
+ //   @Column(name = "ordered")
+  //  private Long ordered;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+  /*  @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)                        //выкл
       @JsonIgnore  // убирает рекурсию пока нет ДТО
     @JoinTable(
             name = "orders_products",
@@ -58,10 +54,10 @@ public class Product extends GenericModel {
             inverseJoinColumns = @JoinColumn(name ="order_id"),
             inverseForeignKey = @ForeignKey(name = "FK_ORDERS_PRODUCTS")
     )
-    private Set<Order> orders= new HashSet<>();
+    private Set<Order> orders= new HashSet<>();   */
 
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
+ /*   @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
      @JsonIgnore // убирает рекурсию
     @JoinTable(
             name = "products_providers",
@@ -69,24 +65,23 @@ public class Product extends GenericModel {
             foreignKey = @ForeignKey(name = "FK_PRODUCTS_PROVIDERS"),
             inverseJoinColumns = @JoinColumn(name = "provider_id"),
             inverseForeignKey = @ForeignKey(name = "FK_PROVIDERS_PRODUCTS"))
-    private Set<Provider> providers = new HashSet<>();
+    private Set<Provider> providers = new HashSet<>();*/
 
     @Builder
-    public Product(Long id, String title, String description, double cost, double discount, String image, Long available, Long ordered, Set<Provider> providers, Set<Order> orders) {
+    public Product(Long id, String title, String description, double cost) {
         super(id);
         this.title = title;
         this.description = description;
         this.cost = cost;
-        this.discount = discount;
-        this.image = image;
-        this.available = available;
-        this.ordered = ordered;
-        this.providers = providers;
-        this.orders = orders;
+     //   this.discount = discount;
+     //   this.image = image;
+     //   this.available = available;
+     //   this.ordered = ordered;
+     //   this.providers = providers;
+      //  this.orders = orders;                     //выкл
     }
-
-   // @ManyToOne(optional = false)
-  //  private Order orders;
+    @ManyToOne(optional = false)
+    private Order orders;
 
   /*  public Order getOrders() {
         return orders;

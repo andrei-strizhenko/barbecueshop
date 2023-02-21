@@ -2,15 +2,19 @@ package com.diplomproject.barbecueshop.dto;
 
 import lombok.Data;
 
-import java.time.LocalDateTime;
-
 @Data
 public class AddProductInOrderDto {
 
-    Double total;
+ //   Double total;
  //   @DateTimeFormat(pattern = "yyyy-MM-dd")
-    LocalDateTime deliveryDateTime;
+ //   LocalDateTime deliveryDateTime;
     Long productId;
+    Long userId;
     Long orderId;
+ //   Long orderInfoId;
+    Double cost;
+ //  ArrayList<ProductDto> listIdOrderedProducts;
+    Integer quantity;
+
 }
 

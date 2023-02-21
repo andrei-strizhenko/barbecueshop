@@ -1,17 +1,10 @@
 package com.diplomproject.barbecueshop.mapper;
 
 import com.diplomproject.barbecueshop.dto.ProductDto;
-import com.diplomproject.barbecueshop.model.GenericModel;
 import com.diplomproject.barbecueshop.model.Product;
 import com.diplomproject.barbecueshop.repository.ProviderRepository;
-import com.diplomproject.barbecueshop.repository.UserRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
-
-import javax.annotation.PostConstruct;
-import java.util.Objects;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 @Component
 public class ProductMapper extends GenericMapper<Product, ProductDto> {
@@ -24,7 +17,7 @@ public class ProductMapper extends GenericMapper<Product, ProductDto> {
         this.providerRepository = providerRepository;
     }
 
-    @PostConstruct
+/*    @PostConstruct
     public void setupMapper() {
         mapper.createTypeMap(Product.class, ProductDto.class)
                 .addMappings(m -> m.skip(ProductDto::setProvidersIds)).setPostConverter(toDtoConverter());
@@ -53,5 +46,5 @@ public class ProductMapper extends GenericMapper<Product, ProductDto> {
                 : Product.getProviders().stream()
                 .map(GenericModel::getId)
                 .collect(Collectors.toSet());
-    }
+    }*/
 }
