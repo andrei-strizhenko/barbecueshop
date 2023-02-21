@@ -1,16 +1,16 @@
 package com.diplomproject.barbecueshop.repository;
 
 import com.diplomproject.barbecueshop.model.Order;
-import com.diplomproject.barbecueshop.model.Product;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Set;
 
 @Repository
 public interface OrderRepository extends GenericRepository<Order> {
 
-List<Order> findOrderByProductId(Long productId);
-    List<Product> find(Long productId);
+List<Order> findAllByIdIn(Set<Long> ids);
+
 
 
 }

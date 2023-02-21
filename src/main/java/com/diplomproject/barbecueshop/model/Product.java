@@ -1,9 +1,12 @@
 package com.diplomproject.barbecueshop.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 
 @Entity
@@ -45,7 +48,7 @@ public class Product extends GenericModel {
  //   @Column(name = "ordered")
   //  private Long ordered;
 
-  /*  @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)                        //выкл
+   @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)                        //выкл
       @JsonIgnore  // убирает рекурсию пока нет ДТО
     @JoinTable(
             name = "orders_products",
@@ -54,7 +57,7 @@ public class Product extends GenericModel {
             inverseJoinColumns = @JoinColumn(name ="order_id"),
             inverseForeignKey = @ForeignKey(name = "FK_ORDERS_PRODUCTS")
     )
-    private Set<Order> orders= new HashSet<>();   */
+    private Set<Order> orders= new HashSet<>();
 
 
  /*   @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
@@ -80,14 +83,5 @@ public class Product extends GenericModel {
      //   this.providers = providers;
       //  this.orders = orders;                     //выкл
     }
-    @ManyToOne(optional = false)
-    private Order orders;
 
-  /*  public Order getOrders() {
-        return orders;
-    }
-
-    public void setOrders(Order orders) {
-        this.orders = orders;
-    }*/
 }

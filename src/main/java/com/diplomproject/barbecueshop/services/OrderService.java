@@ -1,10 +1,8 @@
 package com.diplomproject.barbecueshop.services;
 
-import com.diplomproject.barbecueshop.dto.AddProductInOrderDto;
-import com.diplomproject.barbecueshop.dto.AddUserInOrderDto;
+import com.diplomproject.barbecueshop.dto.AddProductsToTheOrderDto;
 import com.diplomproject.barbecueshop.model.Order;
 import com.diplomproject.barbecueshop.model.Product;
-import com.diplomproject.barbecueshop.model.User;
 import com.diplomproject.barbecueshop.repository.OrderRepository;
 import org.springframework.stereotype.Service;
 
@@ -47,10 +45,10 @@ public class OrderService extends GenericService<Order> {
     }
 
     //добавляем продукт в заказ
-    public Order addProductInOrder(AddProductInOrderDto addProductInOrderDto) {
-        Product product = productService.getOne(addProductInOrderDto.getProductId());
-        User user = userService.getOne(addProductInOrderDto.getUserId());
-        Order order = getOne(addProductInOrderDto.getOrderId());
+    public Order addProductInOrder(AddProductsToTheOrderDto addProductsToTheOrderDto) {
+        Product product = productService.getOne(addProductsToTheOrderDto.getProductId());
+       // User user = userService.getOne(addProductsToTheOrderDto.getUserId());
+        Order order = getOne(addProductsToTheOrderDto.getOrderId());
 
    //     if (order.getOrderDateTime() != null) {
     //        order.setOrderDateTime(order.getOrderDateTime());
@@ -78,7 +76,7 @@ public class OrderService extends GenericService<Order> {
     }
 
     //добавляем пользователя в заказ
-    public Order addUserInOrder(AddUserInOrderDto addUserInOrderDto) {
+   /* public Order addUserInOrder(AddUserInOrderDto addUserInOrderDto) {
         User user = userService.getOne(addUserInOrderDto.getUserId());
         Order order = getOne(addUserInOrderDto.getOrderId());
       //  order.setUser(user);
@@ -86,7 +84,7 @@ public class OrderService extends GenericService<Order> {
 
 
         return update(order);
-    }
+    }*/
 
 
     /* public Film addDirector(AddFilmsDto addFilmsDto) {

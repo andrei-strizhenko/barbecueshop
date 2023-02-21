@@ -1,7 +1,6 @@
 package com.diplomproject.barbecueshop.controler;
 
-import com.diplomproject.barbecueshop.dto.AddProductInOrderDto;
-import com.diplomproject.barbecueshop.dto.AddUserInOrderDto;
+import com.diplomproject.barbecueshop.dto.AddProductsToTheOrderDto;
 import com.diplomproject.barbecueshop.dto.OrderDto;
 import com.diplomproject.barbecueshop.mapper.OrderMapper;
 import com.diplomproject.barbecueshop.model.Order;
@@ -33,16 +32,16 @@ public class OrderController extends GenericController<Order, OrderDto> {
 
     //добавляем продукт в заказ
     @PostMapping("add-product-in-order")
-    public OrderDto addProductInOrder(@RequestBody AddProductInOrderDto addProductInOrderDto) {
-        return mapper.toDto(service.addProductInOrder(addProductInOrderDto));
+    public OrderDto addProductInOrder(@RequestBody AddProductsToTheOrderDto addProductsToTheOrderDto ) {
+        return mapper.toDto(service.addProductInOrder(addProductsToTheOrderDto));
     }
 
 
-    //добавляем пользователя в заказ
+ /*   //добавляем пользователя в заказ
     @PostMapping("add-user-in-order")
-     public OrderDto addUserInOrder(@RequestBody AddUserInOrderDto addUserInOrderDto) {
-       return mapper.toDto(service.addUserInOrder(addUserInOrderDto));
-       }
+     public OrderDto addUserInOrder(@RequestBody AddProductsToTheOrderDto addProductsToTheOrderDto) {
+       return mapper.toDto(service.addUserInOrder(addProductsToTheOrderDto));
+       }*/
 
 
 }
