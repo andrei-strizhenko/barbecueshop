@@ -1,6 +1,5 @@
 package com.diplomproject.barbecueshop.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -54,7 +53,7 @@ public class Order extends GenericModel {
 
 
        @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL) // заменил связь через таблицу orderInfo
-       @JsonIgnore  // убирает рекурсию пока нет ДТО
+     //  @JsonIgnore  // убирает рекурсию пока нет ДТО
        @JoinTable(
                name = "orders_products",
                joinColumns = @JoinColumn(name ="order_id" ),

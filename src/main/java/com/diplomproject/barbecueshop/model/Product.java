@@ -1,6 +1,5 @@
 package com.diplomproject.barbecueshop.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
@@ -49,7 +48,7 @@ public class Product extends GenericModel {
   //  private Long ordered;
 
    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)                        //выкл
-      @JsonIgnore  // убирает рекурсию пока нет ДТО
+   //   @JsonIgnore  // убирает рекурсию пока нет ДТО
     @JoinTable(
             name = "orders_products",
             joinColumns = @JoinColumn(name ="product_id"),
@@ -71,17 +70,17 @@ public class Product extends GenericModel {
     private Set<Provider> providers = new HashSet<>();*/
 
     @Builder
-    public Product(Long id, String title, String description, double cost) {
+    public Product(Long id, String title, String description, double cost, Set<Order> orders) {
         super(id);
         this.title = title;
-        this.description = description;
+       this.description = description;
         this.cost = cost;
      //   this.discount = discount;
      //   this.image = image;
      //   this.available = available;
      //   this.ordered = ordered;
      //   this.providers = providers;
-      //  this.orders = orders;                     //выкл
+        this.orders = orders;                     //выкл
     }
 
 }
