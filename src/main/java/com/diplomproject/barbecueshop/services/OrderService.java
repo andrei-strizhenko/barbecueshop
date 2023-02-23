@@ -21,24 +21,24 @@ public class OrderService extends GenericService<Order> {
     }
 
 
-  //  public Set<Order> getUserOrdering(Long userId) {
-  //     return (Set<Order>) userService.getOne(userId).getDeliveryOrder();
-  //  }
+    //  public Set<Order> getUserOrdering(Long userId) {
+    //     return (Set<Order>) userService.getOne(userId).getDeliveryOrder();
+    //  }
 
     // создаем новый заказ(в заказе только Id и время создания):
     public Order createNewOrder(Order order) {
 
 
-         order = Order.builder()
+        order = Order.builder()
                 .products(null)
-              //  .deliveryDateTime(LocalDateTime.now())
-              //  .deliveryOrder(null)
-              //  .purchase(false)
-              //  .userSurname(null)
-              //  .quantity(0)
-              //  .user(null)
+                //  .deliveryDateTime(LocalDateTime.now())
+                //  .deliveryOrder(null)
+                //  .purchase(false)
+                //  .userSurname(null)
+                //  .quantity(0)
+                //  .user(null)
                 .total(0.0)
-             //   .orderDateTime(LocalDateTime.now())
+                //   .orderDateTime(LocalDateTime.now())
                 .build();
         return orderRepository.save(order);
 
@@ -47,31 +47,23 @@ public class OrderService extends GenericService<Order> {
     //добавляем продукт в заказ
     public Order addProductInOrder(AddProductsToTheOrderDto addProductsToTheOrderDto) {
         Product product = productService.getOne(addProductsToTheOrderDto.getProductId());
-       // User user = userService.getOne(addProductsToTheOrderDto.getUserId());
+        // User user = userService.getOne(addProductsToTheOrderDto.getUserId());
         Order order = getOne(addProductsToTheOrderDto.getOrderId());
+        order.getProducts().add(product);
 
-   //     if (order.getOrderDateTime() != null) {
-    //        order.setOrderDateTime(order.getOrderDateTime());
-   //     } else {
-   //         order.setOrderDateTime(LocalDateTime.now());
-    //    }
-   /*     order.setUserSurname(user.getSurname());
-        order.setUser(user);
-        order.setProduct(product);
-        order.setTotal(order.getTotal() + product.getCost());
-        if(order.getProduct().getId().equals(product.getId())){
-            order.setQuantity(order.getQuantity()+1);
-            order.setTotal(order.getTotal()+product.getCost());
-        }else{
-            order.setProduct(product);
-        }*/
-        //      order.getProducts().add(product);                                                   /выкл
-        //    order.getListIdOrderedProducts().add(product);
-        //   addProductInOrderDto.getTotal(order.getTotal() + product.getCost());
-
-        order.setTotal(order.getTotal() + product.getCost());
-
-
+        for(Product pr : order.getProducts()){
+            if(pr.getId().equals(product.getId())){
+                order.setTotal(order.getTotal() + product.getCost());
+            }else{
+                order.getProducts().add(product);
+                order.setTotal(order.getTotal() + product.getCost());
+            }
+        }
+        //     if (order.getOrderDateTime() != null) {
+        //        order.setOrderDateTime(order.getOrderDateTime());
+        //     } else {
+        //         order.setOrderDateTime(LocalDateTime.now());
+        //    }
         return update(order);
     }
 

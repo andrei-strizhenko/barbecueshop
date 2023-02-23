@@ -12,4 +12,5 @@ import lombok.Setter;
 public class AddProductsToTheOrderDto extends GenericDto{
 private Long productId;
 private Long orderId;
+
 }

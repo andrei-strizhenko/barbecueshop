@@ -28,5 +28,6 @@ public class ProductDto extends GenericDto {
   //  private Long orderId;
    private Set<Long> ordersIds;
  //   private Long productId;
-
+// private Long amount;
+  //  private Long totalSum;
 }
