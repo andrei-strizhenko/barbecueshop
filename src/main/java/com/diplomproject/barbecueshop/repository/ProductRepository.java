@@ -4,7 +4,6 @@ import com.diplomproject.barbecueshop.model.Product;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Set;
 
 @Repository
 public interface ProductRepository extends GenericRepository<Product> {
@@ -12,7 +11,9 @@ public interface ProductRepository extends GenericRepository<Product> {
 
     List<Product> findAllByTitleOrDescriptionOrCost(String title, String description, double cost);
 
-    Set<Product> findAllByIdIn(Set<Long> usersIds);
+  // Set<Product> findAllByIdIn(Set<Long> usersIds);
 
-  //  List<Product>
+    List<Product> findAllByIdIn(List<Long> ids);
+
+
 }

@@ -3,8 +3,8 @@ package com.diplomproject.barbecueshop.model;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "orders")
@@ -19,9 +19,6 @@ public class Order extends GenericModel {
     //  @Id
     //   @Column(name = "id")
     //  private Long id;
-
-
-
 
 
     //   @Column(name = "order_time")
@@ -52,31 +49,32 @@ public class Order extends GenericModel {
     private User user; */
 
 
-       @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL) // заменил связь через таблицу orderInfo
-     //  @JsonIgnore  // убирает рекурсию пока нет ДТО
-       @JoinTable(
-               name = "orders_products",
-               joinColumns = @JoinColumn(name ="order_id" ),
-               foreignKey = @ForeignKey(name = "FK_ORDERS_PRODUCTS"),
-               inverseJoinColumns = @JoinColumn(name ="product_id"),
-               inverseForeignKey = @ForeignKey(name = "FK_PRODUCTS_ORDERS")
-       )
-       private Set<Product> products= new HashSet<>();
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL) // заменил связь через таблицу orderInfo
+ //   @JsonIgnore  // убирает рекурсию пока нет ДТО
+    @JoinTable(
+            name = "orders_products",
+            joinColumns = @JoinColumn(name = "order_id"),
+            foreignKey = @ForeignKey(name = "FK_ORDERS_PRODUCTS"),
+            inverseJoinColumns = @JoinColumn(name = "product_id"),
+           inverseForeignKey = @ForeignKey(name = "FK_PRODUCTS_ORDERS")
+    )
+
+    private List<Product> products = new ArrayList<>();
 
 
- //   @Column(name = "user_surname")
-  //  private String userSurname;
+    //   @Column(name = "user_surname")
+    //  private String userSurname;
 
     @Column(name = "total")
     //  private DecimalFormat total;
     private Double total;
 
 
-  //  @JsonManagedReference
- //  @OneToMany(mappedBy = "orders")
-  //  @Valid
-  //  @Column(name = "products")
-  //  private List<Product> products = new ArrayList<>();
+    //  @JsonManagedReference
+    //  @OneToMany(mappedBy = "orders")
+    //  @Valid
+    //  @Column(name = "products")
+    //  private List<Product> products = new ArrayList<>();
 
     //   @ManyToOne(fetch = FetchType.LAZY)
     //   @JoinColumn(name = "user_id", nullable = false,
@@ -90,26 +88,26 @@ public class Order extends GenericModel {
     private Product product;*/
 
 
- //   @Column(name = "quantity", nullable = false)
- //   private Integer quantity;
+    //   @Column(name = "quantity", nullable = false)
+    //   private Integer quantity;
 
 
     @Builder
 
-    public Order(Long id, Double total, Set<Product> products) {
+    public Order(Long id, Double total, List<Product> products) {
         super(id);
-  //      this.orderDateTime = orderDateTime;
-   //     this.deliveryDateTime = deliveryDateTime;
-   //     this.deliveryOrder = deliveryOrder;
-   //     this.purchase = purchase;
+        //      this.orderDateTime = orderDateTime;
+        //     this.deliveryDateTime = deliveryDateTime;
+        //     this.deliveryOrder = deliveryOrder;
+        //     this.purchase = purchase;
         this.total = total;
         // this.products = products;
-    //    this.user = user;
-    //    this.userSurname = userSurname;
-      this.products = products;
-   //     this.product = product;
+        //    this.user = user;
+        //    this.userSurname = userSurname;
+        this.products = products;
+        //     this.product = product;
 
-     //   this.quantity = quantity;
+        //   this.quantity = quantity;
         //   this.listIdOrderedProducts =listIdOrderedProducts;
     }
 

@@ -2,7 +2,7 @@ package com.diplomproject.barbecueshop.dto;
 
 import lombok.*;
 
-import java.util.Set;
+import java.util.List;
 
 @Getter
 @Setter
@@ -26,7 +26,7 @@ public class ProductDto extends GenericDto {
  //   private Long ordered;
 
   //  private Long orderId;
-   private Set<Long> ordersIds;
+   private List<Long> ordersIds;
  //   private Long productId;
 // private Long amount;
   //  private Long totalSum;

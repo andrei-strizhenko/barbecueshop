@@ -10,7 +10,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class AddProductsToTheOrderDto extends GenericDto{
-private Long productId;
-private Long orderId;
 
+private Long orderId;
+private Long productId;
 }

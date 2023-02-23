@@ -4,8 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Entity
@@ -47,16 +47,9 @@ public class Product extends GenericModel {
  //   @Column(name = "ordered")
   //  private Long ordered;
 
-   @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)                        //выкл
+   @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
    //   @JsonIgnore  // убирает рекурсию пока нет ДТО
-    @JoinTable(
-            name = "orders_products",
-            joinColumns = @JoinColumn(name ="product_id"),
-            foreignKey = @ForeignKey(name = "FK_PRODUCTS_ORDERS"),
-            inverseJoinColumns = @JoinColumn(name ="order_id"),
-            inverseForeignKey = @ForeignKey(name = "FK_ORDERS_PRODUCTS")
-    )
-    private Set<Order> orders= new HashSet<>();
+    private List<Order> orders= new ArrayList<>();
 
 
  /*   @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
@@ -70,7 +63,7 @@ public class Product extends GenericModel {
     private Set<Provider> providers = new HashSet<>();*/
 
     @Builder
-    public Product(Long id, String title, String description, double cost, Set<Order> orders) {
+    public Product(Long id, String title, String description, double cost, List<Order> orders) {
         super(id);
         this.title = title;
        this.description = description;

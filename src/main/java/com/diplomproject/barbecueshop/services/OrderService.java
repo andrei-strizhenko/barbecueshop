@@ -46,19 +46,19 @@ public class OrderService extends GenericService<Order> {
 
     //добавляем продукт в заказ
     public Order addProductInOrder(AddProductsToTheOrderDto addProductsToTheOrderDto) {
-        Product product = productService.getOne(addProductsToTheOrderDto.getProductId());
         // User user = userService.getOne(addProductsToTheOrderDto.getUserId());
         Order order = getOne(addProductsToTheOrderDto.getOrderId());
+        Product product = productService.getOne(addProductsToTheOrderDto.getProductId());
         order.getProducts().add(product);
-
-        for(Product pr : order.getProducts()){
+        order.setTotal(order.getTotal() + product.getCost());
+      /*  for(Product pr : order.getProducts()){
             if(pr.getId().equals(product.getId())){
-                order.setTotal(order.getTotal() + product.getCost());
+
             }else{
                 order.getProducts().add(product);
                 order.setTotal(order.getTotal() + product.getCost());
             }
-        }
+        }*/
         //     if (order.getOrderDateTime() != null) {
         //        order.setOrderDateTime(order.getOrderDateTime());
         //     } else {

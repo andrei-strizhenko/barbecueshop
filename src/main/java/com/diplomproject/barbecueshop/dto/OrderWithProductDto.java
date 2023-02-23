@@ -5,12 +5,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Set;
+import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 
 public class OrderWithProductDto extends OrderDto {
-    private Set<ProductDto> products;
+  //  private Set<ProductDto> products;
+    private List<ProductDto> products;
 }

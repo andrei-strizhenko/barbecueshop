@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Set;
+import java.util.List;
 
 @Getter
 @Setter
@@ -21,7 +21,7 @@ public class OrderDto extends GenericDto {
     //   private ProductDto product;
     private Double total;
     private Integer quantity;
-    private Set<Long> productsIds;
+    private List<Long> productsIds;
 
 
     //  private List<Long> listIdOrderedProducts;

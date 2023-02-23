@@ -8,8 +8,8 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
+import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @Component
@@ -46,11 +46,11 @@ public class ProductMapper extends GenericMapper<Product, ProductDto> {
         destination.setOrdersIds(getIds(source));
     }
 
-    private Set<Long> getIds(Product Product) {
+    private List<Long> getIds(Product Product) {
         return Objects.isNull(Product) || Objects.isNull(Product.getId())
                 ? null
                 : Product.getOrders().stream()
                 .map(GenericModel::getId)
-                .collect(Collectors.toSet());
+                .collect(Collectors.toList());
     }
 }
