@@ -1,12 +1,16 @@
 package com.diplomproject.barbecueshop.mapper;
 
 import com.diplomproject.barbecueshop.dto.OrderDto;
+import com.diplomproject.barbecueshop.model.GenericModel;
 import com.diplomproject.barbecueshop.model.Order;
 import com.diplomproject.barbecueshop.repository.ProductRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
+import java.util.Objects;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Component
     public class OrderMapper extends GenericMapper<Order, OrderDto> {
@@ -35,6 +39,11 @@ import javax.annotation.PostConstruct;
         void mapSpecificFields(OrderDto source, Order destination) {
      //           destination.setProduct(productRepository.findById(source.getProductId()).orElseThrow());
      //           destination.setUser(userRepository.findById(source.getUserId()).orElseThrow());
+            if (!Objects.isNull(source.getProductsIds())) {
+                destination.setProducts(productRepository.findAllByIdIn(source.getProductsIds()));
+            } else {
+                destination.setProducts(null);
+            }
     }
 
 
@@ -42,8 +51,16 @@ import javax.annotation.PostConstruct;
         void mapSpecificFields(Order source, OrderDto destination) {
        //     destination.setProductId(source.getProduct().getId());
       //      destination.setUserId(source.getUser().getId());
+//    destination.setProductsIds(getIds(source));
 
         }
 
+        private Set<Long> getIds(Order order) {
+        return Objects.isNull(order) || Objects.isNull(order.getId())
+                ? null
+                : order.getProducts().stream()
+                .map(GenericModel::getId)
+                .collect(Collectors.toSet());
+         }
 
 }
