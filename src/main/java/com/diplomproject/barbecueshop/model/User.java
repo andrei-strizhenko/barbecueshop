@@ -48,6 +48,9 @@ public class User extends GenericModel {
     )
     private Role role;
 
+    @Column(name = "is_deleted")
+    private boolean isDeleted;
+
    // @SuppressWarnings("JpaDataSourceORMInspection")
   /*  @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(
@@ -77,7 +80,7 @@ public class User extends GenericModel {
 
     @Builder
     public User(Long id, String login, String password, String name, String surname,
-                String birthDate, String phone, String address, String email, Role role) {
+                String birthDate, String phone, String address, String email, Role role, boolean isDeleted) {
         super(id);
         this.login = login;
         this.password = password;
@@ -88,6 +91,8 @@ public class User extends GenericModel {
         this.address = address;
         this.email = email;
         this.role = role;
+        this.isDeleted = isDeleted;
+
       //  this.deliveryOrder = deliveryOrder;
        // this.orders = orders;
 

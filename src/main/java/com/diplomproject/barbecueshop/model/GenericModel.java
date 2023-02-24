@@ -26,19 +26,17 @@ public abstract class GenericModel {
     private LocalDateTime updatedWhen;
 
     @Column(name = "updated_by")
-    private String updatedBy;
+    private String updatedBy;*/
 
-    @Column(name = "is_deleted")
-    private boolean isDeleted;
+ //   @Column(name = "is_deleted")
+  //  private boolean isDeleted;
 
-    @Column(name = "deleted_when")
-    private LocalDateTime deletedWhen;
+  //  @Column(name = "deleted_when")
+ //   private LocalDateTime deletedWhen;
 
-    @Column(name = "deleted_by")
-    private String deletedBy;
+ //   @Column(name = "deleted_by")
+ //   private String deletedBy;
 
 
-    public GenericModel(Long id, LocalDateTime createdWhen) {
 
-    }*/
 }
