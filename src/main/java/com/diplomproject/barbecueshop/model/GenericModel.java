@@ -19,10 +19,10 @@ public abstract class GenericModel {
     //   private LocalDateTime createdWhen;
 
 
-    /* @Column(name = "created_by")
+     @Column(name = "created_by")
     private String createdBy;
 
-    @Column(name = "updated_when")
+ /*   @Column(name = "updated_when")
     private LocalDateTime updatedWhen;
 
     @Column(name = "updated_by")

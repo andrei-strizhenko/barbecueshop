@@ -22,7 +22,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     private String adminUserName;
     @Value("${spring.security.user.password}")
     private String adminPassword;
-    @Value("${spring.security.user.roles}")
+    @Value("ROLE_ADMIN")
     private String adminRole;
 
     public CustomUserDetailsService(UserRepository userRepository) {

@@ -4,6 +4,7 @@ import com.diplomproject.barbecueshop.dto.ProductDto;
 import com.diplomproject.barbecueshop.mapper.ProductMapper;
 import com.diplomproject.barbecueshop.model.Product;
 import com.diplomproject.barbecueshop.services.ProductService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,6 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/product")
+@SecurityRequirement(name = "Bearer Authentication")
 public class ProductController extends GenericController<Product, ProductDto>{
     private final ProductService productService;
     private final ProductMapper productMapper;

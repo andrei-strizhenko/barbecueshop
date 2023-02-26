@@ -7,12 +7,14 @@ import com.diplomproject.barbecueshop.mapper.OrderMapper;
 import com.diplomproject.barbecueshop.mapper.OrderWithProductMapper;
 import com.diplomproject.barbecueshop.model.Order;
 import com.diplomproject.barbecueshop.services.OrderService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
+@SecurityRequirement(name = "Bearer Authentication")
 @RequestMapping("/rest/order")
 public class OrderController extends GenericController<Order, OrderDto> {
 

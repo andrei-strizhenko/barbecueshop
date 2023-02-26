@@ -1,20 +1,13 @@
 package com.diplomproject.barbecueshop.config;
 
-import com.diplomproject.barbecueshop.services.userDetails.CustomUserDetailsService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.web.SecurityFilterChain;
 
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig {
-
+/*
     private final CustomUserDetailsService userDetailsService;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
@@ -37,7 +30,7 @@ public class WebSecurityConfig {
                 .antMatchers("/resources/**")
                 .permitAll()
                 .antMatchers(
-                        "/product/add-product",
+                        "/authors/add",
                         "/authors/update/*",
                         "/authors/add-book/*",
                         "/authors/delete/*")
@@ -70,3 +63,57 @@ public class WebSecurityConfig {
         auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder);
     }
 }
+
+//Spring Boot 3
+//
+//import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.context.annotation.Bean;
+//import org.springframework.context.annotation.Configuration;
+//import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+//import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+//import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+//import org.springframework.security.config.annotation.web.configurers.LogoutConfigurer;
+//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+//import org.springframework.security.web.SecurityFilterChain;
+//import ru.sbercources.library.service.userDetails.CustomUserDetailsService;
+//
+//@Configuration
+//@EnableWebSecurity
+//public class WebSecurityConfig {
+//
+//  private final CustomUserDetailsService userDetailsService;
+//  private final BCryptPasswordEncoder bCryptPasswordEncoder;
+//
+//  public WebSecurityConfig(CustomUserDetailsService userDetailsService,
+//      BCryptPasswordEncoder bCryptPasswordEncoder) {
+//    this.userDetailsService = userDetailsService;
+//    this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+//  }
+//
+//  @Bean
+//  public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+//    http
+//        .authorizeHttpRequests((requests) -> requests
+//            .requestMatchers("/", "/home").permitAll()
+//            .requestMatchers("/authors/add",
+//            "/authors/update/*",
+//            "/authors/add-book/*",
+//            "/authors/delete/*").hasAnyRole("ADMIN", "LIBRARIAN")
+//            .anyRequest().authenticated()
+//        )
+//        .formLogin((form) -> form
+//            .loginPage("/login")
+//            .permitAll()
+//        )
+//        .logout(LogoutConfigurer::permitAll);
+//
+//    return http.build();
+//  }
+//  @Autowired
+//  protected void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+//    auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder);
+//  }*/
+}
+
+
+

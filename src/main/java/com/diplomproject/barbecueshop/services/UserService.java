@@ -28,14 +28,27 @@ public class UserService extends GenericService<User> {
 
     @Override
     public User create(User user) {
-  //      user.setCreatedBy("REGISTRATION");
-        user.setRole(roleService.getOne(1L));
+    //    user.setCreatedBy("REGISTRATION");
+        if(user.getRole().getId() == 1L) {
+            user.setCreatedBy("ADMIN");
+            user.setRole(roleService.getOne(1L));
+         //   user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        }else if(user.getRole().getId() == 2L){
+            user.setCreatedBy("REGISTRATION");
+            user.setRole(roleService.getOne(2L));
+        //    user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        }else{
+            user.setRole(roleService.getOne(3L));
+            user.setCreatedBy("REGISTRATION");
+          //  user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        }
+    //    user.setRole(roleService.getOne(1L));
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         return repository.save(user);
     }
 
-    public User createLibrarian(User user) {
-  //      user.setCreatedBy("ADMIN");
+    public User createManager(User user) {
+        user.setCreatedBy("ADMIN");
         user.setRole(roleService.getOne(2L));
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         return repository.save(user);
@@ -55,7 +68,7 @@ public class UserService extends GenericService<User> {
 
     public void banUser(Long userId) {
         User user = getOne(userId);
- //       user.setDeleted(true);
+        user.setDeleted(true);
   //      user.setDeletedWhen(LocalDateTime.now());
  //       user.setDeletedBy("ADMIN");
         update(user);
@@ -63,7 +76,7 @@ public class UserService extends GenericService<User> {
 
     public void unbanUser(Long userId) {
         User user = getOne(userId);
-    //    user.setDeleted(false);
+        user.setDeleted(false);
     //    user.setDeletedWhen(LocalDateTime.now());
   //      user.setDeletedBy("ADMIN");
         update(user);
@@ -73,8 +86,8 @@ public class UserService extends GenericService<User> {
         return repository.findByEmail(email);
     }*/
 
-    //TODO рассписать про генерацию ссылки
- /*   public void sendChangePasswordEmail(String email) {
+ /*   //TODO рассписать про генерацию ссылки
+    public void sendChangePasswordEmail(String email) {
         UUID uuid = UUID.randomUUID();
         User user = getUserByEmail(email);
 
@@ -93,7 +106,7 @@ public class UserService extends GenericService<User> {
         message.setSubject(subject);
         message.setText(text);
         return message;
-    }
+    }*/
 
     private User findByToken(String password) {
         return repository.findByChangePasswordToken(password);
@@ -104,6 +117,6 @@ public class UserService extends GenericService<User> {
         user.setChangePasswordToken(null);
         user.setPassword(bCryptPasswordEncoder.encode(password));
         update(user);
-    }*/
+    }
 }
 

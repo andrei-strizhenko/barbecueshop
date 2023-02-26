@@ -1,5 +1,6 @@
 package com.diplomproject.barbecueshop.controler;
 
+import com.diplomproject.barbecueshop.dto.LoginDto;
 import com.diplomproject.barbecueshop.dto.UserDto;
 import com.diplomproject.barbecueshop.mapper.UserMapper;
 import com.diplomproject.barbecueshop.model.User;
@@ -7,12 +8,22 @@ import com.diplomproject.barbecueshop.security.JwtTokenUtil;
 import com.diplomproject.barbecueshop.services.UserService;
 import com.diplomproject.barbecueshop.services.userDetails.CustomUserDetailsService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @Slf4j
+//@SecurityRequirement(name = "Bearer Authentication")
 @RestController
 @RequestMapping("/rest/user")
+
 public class UserController extends GenericController<User, UserDto> {
 
     private final JwtTokenUtil jwtTokenUtil;
@@ -25,7 +36,7 @@ public class UserController extends GenericController<User, UserDto> {
         this.customUserDetailsService = customUserDetailsService;
     }
 
-/*    @PostMapping("/auth")
+@PostMapping("/auth")
     public ResponseEntity<?> auth(@RequestBody LoginDto loginDto) {
         Map<String, Object> response = new HashMap<>();
 
@@ -38,6 +49,7 @@ public class UserController extends GenericController<User, UserDto> {
         response.put("authorities", foundUser.getAuthorities());
         return ResponseEntity.ok().body(response);
 
-    }*/
+    }
+
 }
 

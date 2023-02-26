@@ -49,6 +49,13 @@ public class Product extends GenericModel {
 
    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
    //   @JsonIgnore  // убирает рекурсию пока нет ДТО
+   @JoinTable(
+           name = "orders_products",
+           joinColumns = @JoinColumn(name = "product_id"),
+       //    foreignKey = @ForeignKey(name = "FK_PRODUCTS_ORDERS"),
+           inverseJoinColumns = @JoinColumn(name = "order_id")
+         //  inverseForeignKey = @ForeignKey(name = "FK_ORDERS_PRODUCTS" )
+   )
     private List<Order> orders= new ArrayList<>();
 
 
@@ -63,8 +70,8 @@ public class Product extends GenericModel {
     private Set<Provider> providers = new HashSet<>();*/
 
     @Builder
-    public Product(Long id, String title, String description, double cost, List<Order> orders) {
-        super(id);
+    public Product(Long id, String title, String description, double cost, List<Order> orders, String createdBy) {
+        super(id, createdBy);
         this.title = title;
        this.description = description;
         this.cost = cost;

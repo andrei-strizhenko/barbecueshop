@@ -1,27 +1,9 @@
 package com.diplomproject.barbecueshop.MVC.controler;
 
-import com.diplomproject.barbecueshop.dto.UserDto;
-import com.diplomproject.barbecueshop.mapper.UserMapper;
-import com.diplomproject.barbecueshop.model.User;
-import com.diplomproject.barbecueshop.services.UserService;
-import com.diplomproject.barbecueshop.services.userDetails.CustomUserDetails;
 import io.swagger.v3.oas.annotations.Hidden;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.http.HttpStatus;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
-
-import javax.validation.Valid;
-import javax.websocket.server.PathParam;
-import java.util.List;
-import java.util.Objects;
-import java.util.stream.Collectors;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 
 @Slf4j
@@ -29,7 +11,7 @@ import java.util.stream.Collectors;
 @Controller
 @RequestMapping("/users")
 public class MVCUserController {
-
+/*
     private final UserService service;
     private final UserMapper mapper;
 
@@ -125,7 +107,7 @@ public class MVCUserController {
         if (result.hasErrors()) {
             return "/users/addLibrarian";
         } else {
-            service.createLibrarian(mapper.toEntity(userDto));
+            service.createManager(mapper.toEntity(userDto));
             return "redirect:/users/list";
         }
     }
@@ -144,7 +126,7 @@ public class MVCUserController {
             service.sendChangePasswordEmail(userDto.getEmail());
             return "redirect:/login";
         }
-    }*/
+
 
     @GetMapping("/change-password")
     public String changePassword(@PathParam(value = "uuid") String uuid, Model model) {
@@ -153,7 +135,7 @@ public class MVCUserController {
     }
 
 
- /*   @PostMapping("/change-password")
+   @PostMapping("/change-password")
     public String changePassword(@PathParam(value = "uuid") String uuid, @ModelAttribute("changePasswordForm") UserDto userDto) {
         service.changePassword(uuid, userDto.getPassword());
         return "redirect:/login";

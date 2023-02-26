@@ -1,7 +1,6 @@
 package com.diplomproject.barbecueshop;
 
 
-
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -9,7 +8,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @Slf4j
 @SpringBootApplication
-
+//@OpenAPIDefinition(info = @Info(title = "BarbecueSHOP", version = "1.0", description = "Интернет-магазин"))
+//@SecurityScheme(name = "javainuseapi", scheme = "basic", type = SecuritySchemeType.HTTP, in = SecuritySchemeIn.HEADER)
 public class BarbecueshopApplication {
 
     public static void main(String[] args) {

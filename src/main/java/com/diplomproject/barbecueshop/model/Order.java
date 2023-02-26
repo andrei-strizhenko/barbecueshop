@@ -54,11 +54,10 @@ public class Order extends GenericModel {
     @JoinTable(
             name = "orders_products",
             joinColumns = @JoinColumn(name = "order_id"),
-            foreignKey = @ForeignKey(name = "FK_ORDERS_PRODUCTS"),
-            inverseJoinColumns = @JoinColumn(name = "product_id"),
-           inverseForeignKey = @ForeignKey(name = "FK_PRODUCTS_ORDERS")
+       //     foreignKey = @ForeignKey(name = "FK_ORDERS_PRODUCTS"),
+            inverseJoinColumns = @JoinColumn(name = "product_id")
+     //      inverseForeignKey = @ForeignKey(name = "FK_PRODUCTS_ORDERS")
     )
-
     private List<Product> products = new ArrayList<>();
 
 
@@ -70,23 +69,6 @@ public class Order extends GenericModel {
     private Double total;
 
 
-    //  @JsonManagedReference
-    //  @OneToMany(mappedBy = "orders")
-    //  @Valid
-    //  @Column(name = "products")
-    //  private List<Product> products = new ArrayList<>();
-
-    //   @ManyToOne(fetch = FetchType.LAZY)
-    //   @JoinColumn(name = "user_id", nullable = false,
-    //           foreignKey = @ForeignKey(name = "ORDER_DETAIL_ORD_FK"))
-    //   private User user;
-
-
-  /*  @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "product_id", nullable = false,
-            foreignKey = @ForeignKey(name = "ORDER_DETAIL_PROD_FK"))
-    private Product product;*/
-
 
     //   @Column(name = "quantity", nullable = false)
     //   private Integer quantity;
@@ -94,8 +76,8 @@ public class Order extends GenericModel {
 
     @Builder
 
-    public Order(Long id, Double total, List<Product> products) {
-        super(id);
+    public Order(Long id, Double total, List<Product> products, String createdBy) {
+        super(id, createdBy);
         //      this.orderDateTime = orderDateTime;
         //     this.deliveryDateTime = deliveryDateTime;
         //     this.deliveryOrder = deliveryOrder;
