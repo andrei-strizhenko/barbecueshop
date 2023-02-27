@@ -39,8 +39,8 @@ public class JwtTokenFilter extends OncePerRequestFilter {
             return;
         }
 
-         token = header.split(" ")[1].trim();          // не убирает кавычки у токена в свагере при копи паст
-   //    token = header.substring(header.indexOf(" ")).trim();  // не убирает кавычки у токена в свагере при копи паст
+         token = header.split(" ")[1].trim();          // не убирает кавычки у токена в свагере при копировании токена
+   //    token = header.substring(header.indexOf(" ")).trim();  // не убирает кавычки у токена в свагере при копировании токена
         UserDetails userDetails;
         userDetails = customUserDetailsService.loadUserByUsername(jwtTokenUtil.getUserNameFromToken(token));
 

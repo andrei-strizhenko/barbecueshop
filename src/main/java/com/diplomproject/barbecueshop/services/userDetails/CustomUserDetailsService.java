@@ -25,6 +25,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Value("ROLE_ADMIN")
     private String adminRole;
 
+
     public CustomUserDetailsService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }

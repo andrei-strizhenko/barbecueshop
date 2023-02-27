@@ -46,23 +46,37 @@ public class JwtSecurityConfig
             "/rest/user/auth",
             "product/{id}",
             "product/list",
-            "product/search",
-
-
-
+            "product/search"
     };
 
-/*    private static final String[] ADMIN_ACCESS = {
-       "/rest/**"
+    private static final String[] ADMIN_ACCESS = {
+            "/rest/**",
+            "/product/**"
     };
 
     private static final String[] USER_ACCESS = {
-            // User
-            "/rest/product/search",  "/rest/product/list",
+
+                "/rest/user/auth",
+            "product/{id}",
+            "product/list",
+            "product/search",
             "/rest/product/get-one",
-            "/rest/order/get-one",  "/rest/order/add-product-in-order",
-            "/rest/order/get-one",  "/rest/order/add-product-in-order",
-    };*/
+            "/rest/order",
+            "/rest/order/add-product-in-order",
+            "/rest/product/search",
+    };
+
+    private static final String[] MANAGER_ACCESS = {
+
+            "/rest/user/auth",
+            "product/{id}",
+            "product/list",
+            "product/search",
+            "/rest/product/get-one",
+            "/rest/order",
+            "/rest/order/add-product-in-order",
+            "/rest/product/search",
+    };
 
     @Bean
     public SecurityFilterChain filterChainJwt(HttpSecurity http) throws Exception {
@@ -81,6 +95,7 @@ public class JwtSecurityConfig
                 .antMatchers(AUTH_WHITELIST).permitAll()//.hasRole("ROLE_ADMIN")
                 //.mvcMatchers("/css/**", "/img/**", "/js/**", "/encode/*", "/login").permitAll()
                 //            .requestMatchers(AUTH_WHITELIST).permitAll()
+           //     .and().authorizeRequests().antMatchers(USER_ACCESS).hasRole("USER")
 
                 .and()
                 .exceptionHandling()
@@ -93,9 +108,10 @@ public class JwtSecurityConfig
                 })
                 .and().authorizeRequests()
                 //Доступ только для авторизованных пользователей
-                .antMatchers("/products/**", "/rest/**" ).hasRole("ADMIN") //руты которые доступны admin
-             //   .antMatchers("/products/**", "/rest/user/auth").hasRole("USER") //руты которые доступны юзеру
-            //    .antMatchers("/products/**", "/rest/user/auth").hasRole("MANAGER") //руты которые доступны менеджеру
+                .antMatchers( /*"/products/**", "/rest/**"*/ ADMIN_ACCESS ).hasRole("ADMIN") //руты которые доступны admin
+              //  .and().authorizeRequests().antMatchers(USER_ACCESS).hasAnyRole("USER")
+              //  .and().authorizeRequests().antMatchers(MANAGER_ACCESS).hasRole("MANAGER")
+
                 .anyRequest().permitAll()
                 .and()
                 //JWT Token VALID or NOT
