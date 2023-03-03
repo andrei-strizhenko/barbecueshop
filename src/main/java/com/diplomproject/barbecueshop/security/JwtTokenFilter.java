@@ -32,14 +32,14 @@ public class JwtTokenFilter extends OncePerRequestFilter {
             HttpServletResponse response,
             FilterChain filterChain
     ) throws ServletException, IOException {
-        String token = null;
+      //  String token = null;
         final String header = request.getHeader(HttpHeaders.AUTHORIZATION);
         if (header == null || !header.startsWith("Bearer ")) {
             filterChain.doFilter(request, response);
             return;
         }
 
-         token = header.split(" ")[1].trim();          // не убирает кавычки у токена в свагере при копировании токена
+       String token = header.split(" ")[1].trim();          // не убирает кавычки у токена в свагере при копировании токена
    //    token = header.substring(header.indexOf(" ")).trim();  // не убирает кавычки у токена в свагере при копировании токена
         UserDetails userDetails;
         userDetails = customUserDetailsService.loadUserByUsername(jwtTokenUtil.getUserNameFromToken(token));

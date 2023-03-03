@@ -33,26 +33,27 @@ public abstract class GenericController<T extends GenericModel, N extends Generi
     }
 
     @Operation(description = "Получить запись по id", method = "GetOne")
-    @GetMapping("/{id}")
+    @GetMapping("/get-one/{id}")
     public ResponseEntity<N> getById(@PathVariable Long id) {
         return ResponseEntity.status(HttpStatus.OK).body(mapper.toDto(service.getOne(id)));
     }
 
+
     @Operation(description = "Создать запись", method = "Create")
-    @PostMapping
+    @PostMapping("/create")
     public ResponseEntity<N> create(@RequestBody N object) {
         return ResponseEntity.status(HttpStatus.OK).body(mapper.toDto(service.create(mapper.toEntity(object))));
     }
 
     @Operation(description = "Обновить запись", method = "Update")
-    @PutMapping("/{id}")
+    @PutMapping("/update/{id}")
     public ResponseEntity<N> update(@RequestBody N object, @PathVariable Long id) {
         object.setId(id);
         return ResponseEntity.status(HttpStatus.OK).body(mapper.toDto(service.update(mapper.toEntity(object))));
     }
 
     @Operation(description = "Удалить запись", method = "Delete")
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public void delete(@PathVariable Long id) {
         service.delete(id);
     }

@@ -7,6 +7,7 @@ import com.diplomproject.barbecueshop.model.User;
 import com.diplomproject.barbecueshop.security.JwtTokenUtil;
 import com.diplomproject.barbecueshop.services.UserService;
 import com.diplomproject.barbecueshop.services.userDetails.CustomUserDetailsService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +21,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Slf4j
-//@SecurityRequirement(name = "Bearer Authentication")
+@SecurityRequirement(name = "Bearer Authentication")
 @RestController
 @RequestMapping("/rest/user")
 

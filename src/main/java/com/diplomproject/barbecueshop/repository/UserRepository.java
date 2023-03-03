@@ -26,15 +26,31 @@ public interface UserRepository extends GenericRepository<User> {
 
     User findByChangePasswordToken(String token);
 
-    User findUserByLoginAndPasswordFalse(@Param(value = "login") String login);
+//    User findUserByLoginAndPasswordFalse(@Param(value = "login") String login);
 
-    // high java 17
-  /*  @Query(nativeQuery = true, value = """
-    select * from users where login = :login and is_deleted = false
-  """)*/
 
-    @Query(
-            value = "select * from users where login = :login and is_deleted = false",
-            nativeQuery = true)
-    User findUserByLoginAndDeletedFalse(@Param(value = "login") String login);
+//    String query = """
+//               SELECT `EMP_ID`, `LAST_NAME` FROM `EMPLOYEE_TB`
+//               WHERE `CITY` = 'INDIANAPOLIS'
+//               ORDER BY `EMP_ID`, `LAST_NAME`;
+//               """;
+
+//    String query = "SELECT `EMP_ID`, `LAST_NAME` FROM `EMPLOYEE_TB`\n" +
+//            "WHERE `CITY` = 'INDIANAPOLIS'\n" +
+//            "ORDER BY `EMP_ID`, `LAST_NAME`;\n";
+
+
+
+    // high java 13
+  @Query(nativeQuery = true, value = """
+   select * from users where login = :login and is_deleted = false
+  """)
+
+//   @Query(
+//            value = "select * from users where login = :login and is_deleted = false,
+//            nativeQuery = true)
+
+
+       //     @Query("SELECT n FROM User n WHERE n.login = :login AND n.isDeleted = false")
+            User findUserByLoginAndDeletedFalse(@Param(value = "login") String login);
 }

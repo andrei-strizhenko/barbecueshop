@@ -1,7 +1,9 @@
 package com.diplomproject.barbecueshop.services.userDetails;
 
+
 import com.diplomproject.barbecueshop.model.User;
 import com.diplomproject.barbecueshop.repository.UserRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -13,18 +15,19 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+
+@Slf4j
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
 
     private final UserRepository userRepository;
 
-    @Value("${spring.security.user.name}")   // import использовать не lombok, а:  import org.springframework.beans.factory.annotation.Value;
+    @Value("${spring.security.user.name}")
     private String adminUserName;
     @Value("${spring.security.user.password}")
     private String adminPassword;
-    @Value("ROLE_ADMIN")
+    @Value("${spring.security.user.roles}")
     private String adminRole;
-
 
     public CustomUserDetailsService(UserRepository userRepository) {
         this.userRepository = userRepository;
@@ -37,8 +40,15 @@ public class CustomUserDetailsService implements UserDetailsService {
         } else {
             User user = userRepository.findUserByLoginAndDeletedFalse(username);
             List<GrantedAuthority> authorities = new ArrayList<>();
-            authorities.add(new SimpleGrantedAuthority(user.getRole().getId() == 1L ? "ROLE_USER" : "ROLE_MANAGER"));
+            String role = switch (user.getRole().getId().intValue()){
+                case 1 -> "ROLE_ADMIN";
+                case 2 -> "ROLE_USER";
+                default -> "ROLE_MANAGER";
+            };
+            authorities.add(new SimpleGrantedAuthority(role));
             return new CustomUserDetails(user.getId().intValue(), username, user.getPassword(), authorities);
         }
     }
 }
+
+
