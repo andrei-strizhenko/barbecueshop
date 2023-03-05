@@ -15,5 +15,4 @@ public interface ProductRepository extends GenericRepository<Product> {
 
     List<Product> findAllByIdIn(List<Long> ids);
 
-
 }

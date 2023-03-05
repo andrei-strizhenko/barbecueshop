@@ -11,24 +11,19 @@ public class OrderService extends GenericService<Order> {
     private final OrderRepository orderRepository;
     private final UserService userService;
     private final ProductService productService;
+//    private final DeliveryOrderService deliveryOrderService;
 
 
-    public OrderService(OrderRepository orderRepository, UserService userService, ProductService productService) {
+    public OrderService(OrderRepository orderRepository, UserService userService, ProductService productService /*DeliveryOrderService deliveryOrderService*/) {
         super(orderRepository);
         this.orderRepository = orderRepository;
         this.userService = userService;
         this.productService = productService;
+   //     this.deliveryOrderService = deliveryOrderService;
     }
-
-
-    //  public Set<Order> getUserOrdering(Long userId) {
-    //     return (Set<Order>) userService.getOne(userId).getDeliveryOrder();
-    //  }
 
     // создаем новый заказ(в заказе только Id и время создания):
     public Order createNewOrder(Order order) {
-
-
         order = Order.builder()
                 .products(null)
                 //  .deliveryDateTime(LocalDateTime.now())
@@ -41,7 +36,6 @@ public class OrderService extends GenericService<Order> {
                 //   .orderDateTime(LocalDateTime.now())
                 .build();
         return orderRepository.save(order);
-
     }
 
     //добавляем продукт в заказ
@@ -51,6 +45,8 @@ public class OrderService extends GenericService<Order> {
         Product product = productService.getOne(addProductsToTheOrderDto.getProductId());
         order.getProducts().add(product);
         order.setTotal(order.getTotal() + product.getCost());
+        product.setAvailable(product.getAvailable()-1L);
+        product.setOrdered(product.getOrdered()+1L);
       /*  for(Product pr : order.getProducts()){
             if(pr.getId().equals(product.getId())){
 
@@ -66,6 +62,7 @@ public class OrderService extends GenericService<Order> {
         //    }
         return update(order);
     }
+
 
     //добавляем пользователя в заказ
    /* public Order addUserInOrder(AddUserInOrderDto addUserInOrderDto) {

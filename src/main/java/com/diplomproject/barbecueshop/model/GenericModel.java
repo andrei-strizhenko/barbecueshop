@@ -23,6 +23,7 @@ public abstract class GenericModel {
     private String createdBy;
 
  /*   @Column(name = "updated_when")
+    @DateTimeFormat(fallbackPatterns = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
     private LocalDateTime updatedWhen;
 
     @Column(name = "updated_by")

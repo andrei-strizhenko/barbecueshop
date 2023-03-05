@@ -1,14 +1,10 @@
 package com.diplomproject.barbecueshop.model;
 
-import javax.persistence.Column;
-import java.time.LocalDateTime;
-
 import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import java.text.DateFormat;
 import java.time.LocalDateTime;
-import java.util.Collection;
 
 @Entity
 @Table(name = "delivery_orders")
@@ -19,27 +15,43 @@ import java.util.Collection;
 @SequenceGenerator(name = "default_generator", sequenceName = "orders_seq", allocationSize = 1)
 public class DeliveryOrder extends GenericModel {
 
-
-    @Id
-    @Setter(AccessLevel.NONE)
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-
     @Column(name = "delivery_order_time")
+    @DateTimeFormat(fallbackPatterns = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
     private LocalDateTime deliveryOrderDateTime;
 
     @Column(name = "delivery_time")
+    @DateTimeFormat(fallbackPatterns = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
     private LocalDateTime deliveryDateTime;
 
     @Column(name = "status")
-    private String image;
+    private String status;
 
-    @Column(name = "cost")
-    private double cost;
+    @Column(name = "cost_of_delivery")
+    private double costOfDelivery;
+
+    @Column(name = "cost_of_order")
+    private double costOfOrder;
 
     @Column(name = "purchase")
     private boolean purchase;
 
+    @OneToOne(/*mappedBy = "order",*/ fetch = FetchType.LAZY, cascade = CascadeType.ALL) // добавил каскад тип
+    private Order order;
 
+
+
+    @Builder
+    public DeliveryOrder(Long id, String createdBy, LocalDateTime deliveryOrderDateTime,
+                         LocalDateTime deliveryDateTime, String status, double costOfDelivery, boolean purchase, double costOfOrder, Order order) {
+        super(id, createdBy);
+
+        this.deliveryOrderDateTime = deliveryOrderDateTime;
+        this.deliveryDateTime = deliveryDateTime;
+        this.status = status;
+        this.costOfDelivery = costOfDelivery;
+        this.costOfOrder = costOfOrder;
+        this.purchase = purchase;
+        this.order = order;
+    }
 }
 
