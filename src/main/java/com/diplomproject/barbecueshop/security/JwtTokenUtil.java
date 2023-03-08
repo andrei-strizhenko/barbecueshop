@@ -23,7 +23,7 @@ public class JwtTokenUtil {
         return new ObjectMapper();
     }
 
-    public static final long JWT_TOKEN_VALIDITY = 7 * 24 * 60 * 60; //1 неделя
+    public static final long JWT_TOKEN_VALIDITY = 7 * 24 * 60 * 60 * 1000 ; //1 неделя
     private final String secret = "zdtlD3JK56m6wTTgsNFhqzjqP";
 
     public String getUserNameFromToken(String token) {

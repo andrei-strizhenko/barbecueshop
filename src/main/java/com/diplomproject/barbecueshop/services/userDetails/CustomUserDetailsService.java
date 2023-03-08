@@ -43,7 +43,8 @@ public class CustomUserDetailsService implements UserDetailsService {
             String role = switch (user.getRole().getId().intValue()){
                 case 1 -> "ROLE_ADMIN";
                 case 2 -> "ROLE_USER";
-                default -> "ROLE_MANAGER";
+                case 3 -> "ROLE_MANAGER";
+                default -> "UNKNOWN";
             };
             authorities.add(new SimpleGrantedAuthority(role));
             return new CustomUserDetails(user.getId().intValue(), username, user.getPassword(), authorities);

@@ -4,6 +4,7 @@ package com.diplomproject.barbecueshop.model;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -57,15 +58,15 @@ public class User extends GenericModel {
 
 
     // @SuppressWarnings("JpaDataSourceORMInspection")
-  /*  @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(
-            name = "delivery_order_id",
-            foreignKey = @ForeignKey(name = "FK_USERS_DELIVERY_ORDER")
-    )
-    private DeliveryOrder deliveryOrder;
+//   @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//    @JoinColumn(
+//            name = "delivery_order_id",
+//            foreignKey = @ForeignKey(name = "FK_USERS_DELIVERY_ORDER")
+//    )
+//    private DeliveryOrder deliveryOrder;
 
     @OneToMany(mappedBy = "user")
-    private Set<Order> orders;*/
+    private Set<Order> orders;
 
     @Override
     public String toString() {

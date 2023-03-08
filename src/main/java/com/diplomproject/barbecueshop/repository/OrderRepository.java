@@ -8,8 +8,9 @@ import java.util.List;
 @Repository
 public interface OrderRepository extends GenericRepository<Order> {
 
-List<Order> findAllByIdIn(List<Long> ids);
+   List<Order> findAllByIdIn(List<Long> ids);
 
+  //  Set<Order> findAllByIdIn(Set<Long> ids);
 
 
 }

@@ -91,9 +91,12 @@ public class JwtSecurityConfig
                         ))
                 .and().authorizeRequests()
                 .antMatchers("/rest/user/deleted/*", "/rest/user/list", "/rest/user/get-one/*",
-                        "/product/create", "/product/update/*", "/product/delete/*", "/rest/order/list", "/rest/order/deleted/*").hasAnyRole("ADMIN","MANAGER")
+                        "/product/create", "/product/update/*", "/product/delete/*", "/rest/order/list", "/rest/order/deleted/*","/rest/order/list","/rest/provider/*",
+                        "/role/list","/rest/delivery-order/update/*", "/rest/delivery-order/delete/*",
+                        "/rest/delivery-order/get-one/*", "/rest/delivery-order/list",
+                        "/rest/provider/update/*", "/rest/provider/create", "/rest/provider/delete/*","/rest/provider/list", "/rest/provider/update/*","/rest/provider/get-one/*").hasAnyRole("ADMIN","MANAGER")
                 .antMatchers("/product/list", "/product/get-one/*","/product/search","/rest/order/create","/rest/order/get-one/*",
-                        "/rest/order/create-new-order", "/rest/order/update/*", "/rest/order/list").hasRole( "USER")
+                        "/rest/order/create-new-order", "/rest/order/update/*").hasAnyRole( "USER")
 
                 .and()
                 //JWT Token VALID or NOT

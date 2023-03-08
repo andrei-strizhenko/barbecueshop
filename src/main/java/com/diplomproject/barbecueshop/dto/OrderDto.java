@@ -20,7 +20,8 @@ public class OrderDto extends GenericDto {
     //   private UserDto user;
     //   private ProductDto product;
     private Double total;
-    private Integer quantity;
+   // private User user;
+    private String surname;
     private List<Long> productsIds;
 
 

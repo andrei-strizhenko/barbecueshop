@@ -8,8 +8,8 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
+import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @Component
@@ -55,12 +55,12 @@ import java.util.stream.Collectors;
 
         }
 
-        private Set<Long> getIds(Order order) {
+        private List<Long> getIds(Order order) {
         return Objects.isNull(order) || Objects.isNull(order.getId())
                 ? null
                 : order.getProducts().stream()
                 .map(GenericModel::getId)
-                .collect(Collectors.toSet());
+                .collect(Collectors.toList());
          }
 
 }

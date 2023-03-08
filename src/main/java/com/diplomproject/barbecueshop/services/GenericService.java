@@ -3,14 +3,13 @@ package com.diplomproject.barbecueshop.services;
 
 import com.diplomproject.barbecueshop.model.GenericModel;
 import com.diplomproject.barbecueshop.repository.GenericRepository;
-import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.stereotype.Service;
 import org.webjars.NotFoundException;
 
 import java.util.List;
 
 @Service
-@SecurityRequirement(name = "Bearer Authentication")
+//@SecurityRequirement(name = "Bearer Authentication")
 public abstract class GenericService<T extends GenericModel> {
 
     private final GenericRepository<T> repository;
