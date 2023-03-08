@@ -20,67 +20,77 @@ public class Order extends GenericModel {
     //   @Column(name = "id")
     //  private Long id;
 
+
+    //   @Column(name = "order_time")
+    //   private LocalDateTime orderDateTime;
+
+//    @Column(name = "delivery_time")
+    //   private LocalDateTime deliveryDateTime;
+
+
     // @SuppressWarnings("JpaDataSourceORMInspection")
-    @OneToOne(fetch = FetchType.LAZY) // добавил каскад тип
-    private DeliveryOrder deliveryOrder;
+ /*   @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL) // добавил каскад тип
+    @JoinColumn(
+            name = "delivery_order_id",
+            foreignKey = @ForeignKey(name = "FK_ORDERS_DELIVERY_ORDER")
+    )
+    private DeliveryOrder deliveryOrder;*/
 
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    //  @Column(name = "purchase")
+    //   private boolean purchase;
+
+
+  /*  @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(
             name = "user_id",
             foreignKey = @ForeignKey(name = "FK_USER_PRO")
     )
-    private User user;
+    private User user; */
 
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL) // заменил связь через таблицу orderInfo
-    //   @JsonIgnore  // убирает рекурсию пока нет ДТО
+ //   @JsonIgnore  // убирает рекурсию пока нет ДТО
     @JoinTable(
             name = "orders_products",
             joinColumns = @JoinColumn(name = "order_id"),
-            //     foreignKey = @ForeignKey(name = "FK_ORDERS_PRODUCTS"),
+       //     foreignKey = @ForeignKey(name = "FK_ORDERS_PRODUCTS"),
             inverseJoinColumns = @JoinColumn(name = "product_id")
-            //      inverseForeignKey = @ForeignKey(name = "FK_PRODUCTS_ORDERS")
+     //      inverseForeignKey = @ForeignKey(name = "FK_PRODUCTS_ORDERS")
     )
     private List<Product> products = new ArrayList<>();
 
 
-
-    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
-    //  @JsonIgnore // убирает рекурсию
-    @JoinTable(
-            name = "orders_providers",
-            joinColumns = @JoinColumn(name = "order_id"),
-            foreignKey = @ForeignKey(name = "FK_ORDERS_PROVIDERS"),
-            inverseJoinColumns = @JoinColumn(name = "provider_id"),
-            inverseForeignKey = @ForeignKey(name = "FK_PROVIDERS_ORDERS"))
-    private List<Provider> providers = new ArrayList<>();
-
-
-    @Column(name = "user_surname")
-    private String userSurname;
+    //   @Column(name = "user_surname")
+    //  private String userSurname;
 
     @Column(name = "total")
+    //  private DecimalFormat total;
     private Double total;
+
+
+
+    //   @Column(name = "quantity", nullable = false)
+    //   private Integer quantity;
 
 
     @Builder
 
-    public Order(Long id, Double total, List<Product> products, List<Provider> providers, String createdBy, String userSurname, User user, DeliveryOrder deliveryOrder) {
+    public Order(Long id, Double total, List<Product> products, String createdBy) {
         super(id, createdBy);
         //      this.orderDateTime = orderDateTime;
         //     this.deliveryDateTime = deliveryDateTime;
-        this.deliveryOrder = deliveryOrder;
+        //     this.deliveryOrder = deliveryOrder;
         //     this.purchase = purchase;
         this.total = total;
-        this.user = user;
-        this.userSurname = userSurname;
+        // this.products = products;
+        //    this.user = user;
+        //    this.userSurname = userSurname;
         this.products = products;
-        this.providers = providers;
+        //     this.product = product;
 
-
+        //   this.quantity = quantity;
+        //   this.listIdOrderedProducts =listIdOrderedProducts;
     }
-
-
 
 }

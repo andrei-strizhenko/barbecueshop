@@ -1,9 +1,14 @@
 package com.diplomproject.barbecueshop.model;
 
+import javax.persistence.Column;
+import java.time.LocalDateTime;
+
 import lombok.*;
 
 import javax.persistence.*;
+import java.text.DateFormat;
 import java.time.LocalDateTime;
+import java.util.Collection;
 
 @Entity
 @Table(name = "delivery_orders")
@@ -15,10 +20,10 @@ import java.time.LocalDateTime;
 public class DeliveryOrder extends GenericModel {
 
 
-//    @Id
-//    @Setter(AccessLevel.NONE)
-//    @GeneratedValue(strategy = GenerationType.AUTO)
-//    private Long id;
+    @Id
+    @Setter(AccessLevel.NONE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
     @Column(name = "delivery_order_time")
     private LocalDateTime deliveryOrderDateTime;
@@ -27,32 +32,14 @@ public class DeliveryOrder extends GenericModel {
     private LocalDateTime deliveryDateTime;
 
     @Column(name = "status")
-    private String status;
+    private String image;
 
-    @Column(name = "cost_of_delivery")
-    private double costOfDelivery;
-
-    @Column(name = "cost_of_order")
-    private double costOfOrder;
+    @Column(name = "cost")
+    private double cost;
 
     @Column(name = "purchase")
     private boolean purchase;
 
-    @OneToOne(fetch = FetchType.LAZY) // добавил каскад тип
-    private Order order;
-
-    @Builder
-    public DeliveryOrder(Long id, String createdBy, LocalDateTime deliveryOrderDateTime, LocalDateTime deliveryDateTime, double costOfDelivery, double costOfOrder, boolean purchase, Order order, String status) {
-        super(id, createdBy);
-        this.deliveryOrderDateTime = deliveryOrderDateTime;
-        this.deliveryDateTime = deliveryDateTime;
-        this.status = status;
-        this.costOfDelivery = costOfDelivery;
-        this.costOfOrder = costOfOrder;
-        this.purchase = purchase;
-        this.order = order;
-
-    }
 
 }
 
