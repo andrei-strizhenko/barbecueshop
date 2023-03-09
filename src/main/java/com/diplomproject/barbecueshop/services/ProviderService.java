@@ -1,9 +1,6 @@
 package com.diplomproject.barbecueshop.services;
 
-<<<<<<< HEAD
 
-=======
->>>>>>> origin/main
 import com.diplomproject.barbecueshop.model.Provider;
 import com.diplomproject.barbecueshop.repository.ProviderRepository;
 import org.springframework.stereotype.Service;
@@ -17,7 +14,4 @@ public class ProviderService extends GenericService<Provider> {
         this.providerRepository = providerRepository;
     }
 }
-<<<<<<< HEAD
 
-=======
->>>>>>> origin/main

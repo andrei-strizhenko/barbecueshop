@@ -45,20 +45,20 @@ public class Product extends GenericModel {
     @Column(name = "ordered")
     private Long ordered;
 
-   @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-   //   @JsonIgnore  // убирает рекурсию пока нет ДТО
-   @JoinTable(
-           name = "orders_products",
-           joinColumns = @JoinColumn(name = "product_id"),
-       //    foreignKey = @ForeignKey(name = "FK_PRODUCTS_ORDERS"),
-           inverseJoinColumns = @JoinColumn(name = "order_id")
-         //  inverseForeignKey = @ForeignKey(name = "FK_ORDERS_PRODUCTS" )
-   )
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    //   @JsonIgnore  // убирает рекурсию пока нет ДТО
+    @JoinTable(
+            name = "orders_products",
+            joinColumns = @JoinColumn(name = "product_id"),
+            //    foreignKey = @ForeignKey(name = "FK_PRODUCTS_ORDERS"),
+            inverseJoinColumns = @JoinColumn(name = "order_id")
+            //  inverseForeignKey = @ForeignKey(name = "FK_ORDERS_PRODUCTS" )
+    )
     private List<Order> orders= new ArrayList<>();
 
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
-   //  @JsonIgnore // убирает рекурсию
+    //  @JsonIgnore // убирает рекурсию
     @JoinTable(
             name = "products_providers",
             joinColumns = @JoinColumn(name = "product_id"),
@@ -72,14 +72,15 @@ public class Product extends GenericModel {
                    Set<Provider> providers, String image, Long available, Long ordered) {
         super(id, createdBy);
         this.title = title;
-       this.description = description;
+        this.description = description;
         this.cost = cost;
-       this.discount = discount;
+        this.discount = discount;
         this.image = image;
         this.available = available;
         this.ordered = ordered;
-   //     this.providers = providers;
+        //     this.providers = providers;
         this.orders = orders;                     //выкл
     }
+
 
 }

@@ -22,15 +22,8 @@ public class OrderService extends GenericService<Order> {
         this.productService = productService;
     }
 
-
-    //  public Set<Order> getUserOrdering(Long userId) {
-    //     return (Set<Order>) userService.getOne(userId).getDeliveryOrder();
-    //  }
-
     // создаем новый заказ(в заказе только Id и время создания):
     public Order createNewOrder(Order order) {
-
-
         order = Order.builder()
                 .products(null)
                 //  .deliveryDateTime(LocalDateTime.now())
@@ -52,19 +45,6 @@ public class OrderService extends GenericService<Order> {
         Product product = productService.getOne(addProductsToTheOrderDto.getProductId());
         order.getProducts().add(product);
         order.setTotal(order.getTotal() + product.getCost());
-      /*  for(Product pr : order.getProducts()){
-            if(pr.getId().equals(product.getId())){
-
-            }else{
-                order.getProducts().add(product);
-                order.setTotal(order.getTotal() + product.getCost());
-            }
-        }*/
-        //     if (order.getOrderDateTime() != null) {
-        //        order.setOrderDateTime(order.getOrderDateTime());
-        //     } else {
-        //         order.setOrderDateTime(LocalDateTime.now());
-        //    }
         return update(order);
     }
 
@@ -79,12 +59,5 @@ public class OrderService extends GenericService<Order> {
     }
 
 
-    /* public Film addDirector(AddFilmsDto addFilmsDto) {
-        Director director = directorService.getOne(addFilmsDto.getDirectorId());
-        Film film = getOne(addFilmsDto.getFilmId());
-        film.getDirectors().add(director);
-      //  director.getFilms().add(film);
-      //  directorService.update(director);
-        return update(film);
-    }*/
+
 }

@@ -1,14 +1,10 @@
 package com.diplomproject.barbecueshop.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 
 @Entity
@@ -24,6 +20,8 @@ public class Provider extends GenericModel {
         //  @Column(name = "id")
         //   private Long id;
 
+
+
         @Column(name = "name")
         private String title;
 
@@ -32,4 +30,37 @@ public class Provider extends GenericModel {
 
         @Column(name = "phone")
         private String phone;
+
+        @Column(name = "product_name")
+        private String productName;
+
+        @Column(name = "amount")
+        private Long amount;
+
+        @Column(name = "cost")
+        private Double cost;
+
+        @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
+        //   @JsonIgnore // убирает рекурсию
+        @JoinTable(
+                name = "products_providers",
+                joinColumns = @JoinColumn(name = "provider_id"),
+                foreignKey = @ForeignKey(name = "FK_PROVIDERS_PRODUCTS"),
+                inverseJoinColumns = @JoinColumn(name = "product_id"),
+                inverseForeignKey = @ForeignKey(name = "FK_PRODUCTS_PROVIDERS"))
+        private Set<Product> products = new HashSet<>();
+
+
+        @Builder
+        public Provider(Long id, String createdBy, String title, String description, String phone, String productName, Long amount, Double cost, Set<Product> products) {
+                super(id, createdBy);
+                this.title = title;
+                this.description = description;
+                this.phone = phone;
+                this.productName = productName;
+                this.amount = amount;
+                this.cost = cost;
+                this.products = products;
+        }
+
 }

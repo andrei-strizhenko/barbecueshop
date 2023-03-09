@@ -8,8 +8,7 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-<<<<<<< HEAD
-    =======
+
 
 @RestController
 @SecurityRequirement(name = "Bearer Authentication")
@@ -25,5 +24,5 @@ public class ProviderController extends GenericController<Provider, ProviderDto>
         this.providerMapper = providerMapper;
     }
 }
->>>>>>> origin/main
+
 

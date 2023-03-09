@@ -16,6 +16,7 @@ import java.util.List;
 
 public class Order extends GenericModel {
 
+
     //  @Id
     //   @Column(name = "id")
     //  private Long id;
@@ -29,45 +30,39 @@ public class Order extends GenericModel {
 
 
     // @SuppressWarnings("JpaDataSourceORMInspection")
- /*   @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL) // добавил каскад тип
-    @JoinColumn(
-            name = "delivery_order_id",
-            foreignKey = @ForeignKey(name = "FK_ORDERS_DELIVERY_ORDER")
-    )
-    private DeliveryOrder deliveryOrder;*/
+    @OneToOne(fetch = FetchType.LAZY) // добавил каскад тип
+    private DeliveryOrder deliveryOrder;
 
 
     //  @Column(name = "purchase")
     //   private boolean purchase;
 
 
-  /*  @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(
             name = "user_id",
             foreignKey = @ForeignKey(name = "FK_USER_PRO")
     )
-    private User user; */
+    private User user;
 
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL) // заменил связь через таблицу orderInfo
- //   @JsonIgnore  // убирает рекурсию пока нет ДТО
+    //   @JsonIgnore  // убирает рекурсию пока нет ДТО
     @JoinTable(
             name = "orders_products",
             joinColumns = @JoinColumn(name = "order_id"),
-       //     foreignKey = @ForeignKey(name = "FK_ORDERS_PRODUCTS"),
+            //     foreignKey = @ForeignKey(name = "FK_ORDERS_PRODUCTS"),
             inverseJoinColumns = @JoinColumn(name = "product_id")
-     //      inverseForeignKey = @ForeignKey(name = "FK_PRODUCTS_ORDERS")
+            //      inverseForeignKey = @ForeignKey(name = "FK_PRODUCTS_ORDERS")
     )
     private List<Product> products = new ArrayList<>();
 
 
-    //   @Column(name = "user_surname")
-    //  private String userSurname;
+    @Column(name = "user_surname")
+    private String userSurname;
 
     @Column(name = "total")
-    //  private DecimalFormat total;
     private Double total;
-
 
 
     //   @Column(name = "quantity", nullable = false)
@@ -76,21 +71,17 @@ public class Order extends GenericModel {
 
     @Builder
 
-    public Order(Long id, Double total, List<Product> products, String createdBy) {
+    public Order(Long id, Double total, List<Product> products, String createdBy, String userSurname, User user, DeliveryOrder deliveryOrder) {
         super(id, createdBy);
         //      this.orderDateTime = orderDateTime;
         //     this.deliveryDateTime = deliveryDateTime;
-        //     this.deliveryOrder = deliveryOrder;
+        this.deliveryOrder = deliveryOrder;
         //     this.purchase = purchase;
         this.total = total;
-        // this.products = products;
-        //    this.user = user;
-        //    this.userSurname = userSurname;
+        this.user = user;
+        this.userSurname = userSurname;
         this.products = products;
-        //     this.product = product;
 
-        //   this.quantity = quantity;
-        //   this.listIdOrderedProducts =listIdOrderedProducts;
     }
 
 }
