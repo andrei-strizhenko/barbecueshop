@@ -85,7 +85,7 @@ public class User extends GenericModel {
 
     @Builder
     public User(Long id, String login, String password, String name, String surname,
-                String birthDate, String phone, String address, String email, Role role, boolean isDeleted, String createdBy) {
+                String birthDate, String phone, String address, String email, Role role, boolean isDeleted, String createdBy, Set<Order> orders) {
         super(id, createdBy);
         this.login = login;
         this.password = password;
@@ -97,6 +97,7 @@ public class User extends GenericModel {
         this.email = email;
         this.role = role;
         this.isDeleted = isDeleted;
+        this.orders = orders;
 
       //  this.deliveryOrder = deliveryOrder;
        // this.orders = orders;

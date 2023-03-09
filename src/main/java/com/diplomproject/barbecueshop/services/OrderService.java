@@ -1,8 +1,10 @@
 package com.diplomproject.barbecueshop.services;
 
 import com.diplomproject.barbecueshop.dto.AddProductsToTheOrderDto;
+import com.diplomproject.barbecueshop.dto.AddUserInOrderDto;
 import com.diplomproject.barbecueshop.model.Order;
 import com.diplomproject.barbecueshop.model.Product;
+import com.diplomproject.barbecueshop.model.User;
 import com.diplomproject.barbecueshop.repository.OrderRepository;
 import org.springframework.stereotype.Service;
 
@@ -41,7 +43,6 @@ public class OrderService extends GenericService<Order> {
                 //   .orderDateTime(LocalDateTime.now())
                 .build();
         return orderRepository.save(order);
-
     }
 
     //добавляем продукт в заказ
@@ -68,15 +69,14 @@ public class OrderService extends GenericService<Order> {
     }
 
     //добавляем пользователя в заказ
-   /* public Order addUserInOrder(AddUserInOrderDto addUserInOrderDto) {
+    public Order addUserInOrder(AddUserInOrderDto addUserInOrderDto) {
         User user = userService.getOne(addUserInOrderDto.getUserId());
         Order order = getOne(addUserInOrderDto.getOrderId());
-      //  order.setUser(user);
-     //   order.setUserSurname(user.getSurname());
-
-
+        order.setUser(user);
+        order.setUserSurname(user.getSurname());
+        user.getOrders().add(order);
         return update(order);
-    }*/
+    }
 
 
     /* public Film addDirector(AddFilmsDto addFilmsDto) {
