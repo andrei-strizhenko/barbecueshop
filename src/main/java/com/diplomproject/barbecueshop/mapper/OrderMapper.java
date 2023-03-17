@@ -37,8 +37,6 @@ import java.util.stream.Collectors;
 
         @Override
         void mapSpecificFields(OrderDto source, Order destination) {
-     //           destination.setProduct(productRepository.findById(source.getProductId()).orElseThrow());
-     //           destination.setUser(userRepository.findById(source.getUserId()).orElseThrow());
             if (!Objects.isNull(source.getProductsIds())) {
                 destination.setProducts(productRepository.findAllByIdIn(source.getProductsIds()));
             } else {
@@ -46,12 +44,9 @@ import java.util.stream.Collectors;
             }
     }
 
-
         @Override
         void mapSpecificFields(Order source, OrderDto destination) {
-       //     destination.setProductId(source.getProduct().getId());
-      //      destination.setUserId(source.getUser().getId());
-//    destination.setProductsIds(getIds(source));
+            destination.setProductsIds(getIds(source));   // коммент
 
         }
 

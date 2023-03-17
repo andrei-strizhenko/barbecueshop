@@ -11,20 +11,21 @@ import java.util.Set;
 @AllArgsConstructor
 @Builder
 public class ProductDto extends GenericDto {
+    private String createdBy;
   //  @NotBlank(message = "Поле не должно быть пустым")
     private String title;
 //    @NotBlank(message = "Поле не должно быть пустым")
- //   private String description;
+    private String description;
 //    @NotBlank(message = "Поле не должно быть пустым")
     private Double cost;
  //   @NotBlank(message = "Поле не должно быть пустым")
-  //  private double discount;
+    private Double discount;
   //  @NotBlank(message = "Поле не должно быть пустым")
-  //  private String image;
+    private String image;
  //   @NotBlank(message = "Поле не должно быть пустым")
-  //  private Long available;
+    private Long available;
   //  @NotBlank(message = "Поле не должно быть пустым")
- //   private Long ordered;
+    private Long ordered;
 
   //  private Long orderId;
    private List<Long> ordersIds;

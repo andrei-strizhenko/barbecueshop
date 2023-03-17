@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@SequenceGenerator(name = "default_generator", sequenceName = "orders_seq", allocationSize = 1)
+@SequenceGenerator(name = "default_generator", sequenceName = "delivery_orders_seq", allocationSize = 1)
 public class DeliveryOrder extends GenericModel {
 
 

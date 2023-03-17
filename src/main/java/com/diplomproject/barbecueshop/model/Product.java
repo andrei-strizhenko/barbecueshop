@@ -17,7 +17,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-@SequenceGenerator(name = "default_generator", sequenceName = "films_seq", allocationSize = 1)
+@SequenceGenerator(name = "default_generator", sequenceName = "products_seq", allocationSize = 1)
 
 public class Product extends GenericModel {
     //  @Id
@@ -78,7 +78,7 @@ public class Product extends GenericModel {
         this.image = image;
         this.available = available;
         this.ordered = ordered;
-        //     this.providers = providers;
+        this.providers = providers;
         this.orders = orders;                     //выкл
     }
 

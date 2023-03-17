@@ -42,7 +42,7 @@ public class User extends GenericModel {
     @Column(name = "email")
     private String email;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL) // добавил каскад тип
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(
             name = "role_id",
             foreignKey = @ForeignKey(name = "FK_USER_ROLES")

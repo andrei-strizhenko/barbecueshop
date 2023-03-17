@@ -13,7 +13,7 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@SequenceGenerator(name = "default_generator", sequenceName = "users_seq", allocationSize = 1)
+@SequenceGenerator(name = "default_generator", sequenceName = "providers_seq", allocationSize = 1)
 public class Provider extends GenericModel {
 
         //  @Id
