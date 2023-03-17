@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @SecurityRequirement(name = "Bearer Authentication")
-@RequestMapping("/role") //localhost:9092/role
+@RequestMapping("/rest/role") //localhost:9092/role
 public class RoleController {
 
     private final RoleService service;

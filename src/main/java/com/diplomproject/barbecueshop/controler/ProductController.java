@@ -14,7 +14,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/product")
+@RequestMapping("/rest/product")
 @SecurityRequirement(name = "Bearer Authentication")
 public class ProductController extends GenericController<Product, ProductDto>{
     private final ProductService productService;

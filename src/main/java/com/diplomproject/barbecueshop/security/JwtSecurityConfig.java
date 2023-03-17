@@ -91,12 +91,12 @@ public class JwtSecurityConfig
                         ))
                 .and().authorizeRequests()
                 .antMatchers("/rest/user/deleted/*", "/rest/user/list", "/rest/user/get-one/*", "/rest/user/update/*",
-                        "/product/create", "/product/update/*", "/product/delete/*", "/rest/order/list", "/rest/order/deleted/*",
-                        "/rest/order/list", "/role/list","/rest/delivery-order/update/*", "/rest/delivery-order/delete/*",
+                        "/rest/product/create", "/rest/product/update/*", "/rest/product/delete/*", "/rest/order/list", "/rest/order/deleted/*",
+                        "/rest/order/list", "/rest/role/list","/rest/delivery-order/update/*", "/rest/delivery-order/delete/*",
                         "/rest/delivery-order/get-one/*", "/rest/delivery-order/list", "/rest/provider/update/*", "/rest/provider/create",
                         "/rest/provider/delete/*","/rest/provider/list", "/rest/provider/update/*","/rest/provider/get-one/*",
-                        "/role/*").hasAnyRole("ADMIN","MANAGER")
-                .antMatchers("/rest/user/create", "/product/list", "/product/get-one/*","/product/search","/rest/order/create","/rest/order/get-one/*",
+                        "/rest/role/*").hasAnyRole("ADMIN","MANAGER")
+                .antMatchers("/rest/user/create", "/rest/product/list", "/rest/product/get-one/*","/rest/product/search","/rest/order/create","/rest/order/get-one/*",
                         "/rest/order/create-new-order", "/rest/order/update/*").hasAnyRole( "USER", "MANAGER", "ADMIN")
 
                 .and()

@@ -35,7 +35,7 @@ public class ProductControllerTest extends CommonForTest {
     @Order(3)
     @Test
     void getProductList() throws Exception {
-        String result = mvc.perform(get("/product/list").headers(headers))
+        String result = mvc.perform(get("/rest/product/list").headers(headers))
                 .andExpect(status().is2xxSuccessful())
                 .andReturn()
                 .getResponse()
@@ -50,7 +50,7 @@ public class ProductControllerTest extends CommonForTest {
         headers.add("Authorization", "Bearer " + tokenAdmin);
 
         String result = mvc.perform(
-                post("/product/create")
+                post("/rest/product/create")
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
                         .headers(headers)
                         .content(asJsonString(productDto)))
@@ -68,7 +68,7 @@ public class ProductControllerTest extends CommonForTest {
     void updateProduct() throws Exception {
         headers.clear();
         headers.add("Authorization", "Bearer " + tokenAdmin);
-        mvc.perform(put("/product/update/" + testId)
+        mvc.perform(put("/rest/product/update/" + testId)
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .headers(headers)
                 .content(asJsonString(productUpdateDto)))
@@ -82,7 +82,7 @@ public class ProductControllerTest extends CommonForTest {
     void getOneProduct() throws Exception {
         headers.clear();
         headers.add("Authorization", "Bearer " + tokenAdmin);
-        String result = mvc.perform(get("/product/get-one/" + testId).headers(headers))
+        String result = mvc.perform(get("/rest/product/get-one/" + testId).headers(headers))
                 .andExpect(status().is2xxSuccessful())
                 .andReturn()
                 .getResponse()
@@ -92,7 +92,7 @@ public class ProductControllerTest extends CommonForTest {
 
     @Test
     void deleteProduct() throws Exception {
-        mvc.perform(delete("/product/delete/" + testId).headers(headers))
+        mvc.perform(delete("/rest/product/delete/" + testId).headers(headers))
                 .andExpect(status().is2xxSuccessful());
     }
 

@@ -23,7 +23,7 @@ public class RoleControllerTest extends CommonForTest {
     void getRoleList() throws Exception {
         headers.clear();
         headers.add("Authorization", "Bearer " + tokenAdmin);
-        String result = mvc.perform(get("/role/list").headers(headers))
+        String result = mvc.perform(get("/rest/role/list").headers(headers))
                 .andExpect(status().is2xxSuccessful())
                 .andReturn()
                 .getResponse()
