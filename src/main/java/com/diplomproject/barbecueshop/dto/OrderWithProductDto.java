@@ -10,7 +10,6 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-
 public class OrderWithProductDto extends OrderDto {
   //  private Set<ProductDto> products;
     private List<ProductDto> products;

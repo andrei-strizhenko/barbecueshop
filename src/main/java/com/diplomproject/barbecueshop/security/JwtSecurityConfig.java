@@ -42,31 +42,49 @@ public class JwtSecurityConfig
             "/swagger-ui/**",
             "/css/**", "/img/**", "/js/**", "/encode/*", "/login",
             // other public endpoints of your API may be appended to this array
-            "/rest/user/auth"
+            "/rest/user/auth", "/rest/product/list",
+
+            //open all pages for linked clients side(frontend)
+            //for admin
+           // "/rest/role/*",
+
+            //for manager
+            "/rest/user/deleted/*", "/rest/user/list", "/rest/user/get-one/*", "/rest/user/update/*",
+            "/rest/product/create", "/rest/product/update/*", "/rest/product/delete/*", "/rest/order/list", "/rest/order/deleted/*",
+            "/rest/order/list", "/rest/role/list","/rest/delivery-order/update/*", "/rest/delivery-order/delete/*",
+            "/rest/delivery-order/get-one/*", "/rest/delivery-order/list", "/rest/provider/update/*", "/rest/provider/create",
+        //    "/rest/provider/delete/*","/rest/provider/list", "/rest/provider/update/*","/rest/provider/get-one/*",
+
+            //for User
+            "/rest/user/create", "/rest/product/get-one/*",
+            "/rest/product/search","/rest/order/create","/rest/order/get-one/*",
+            "/rest/order/create-new-order"
+            //, "/rest/order/update/*"
 
     };
 
-    private static final String[] USER_ACCESS = {
+    private static final String[] ADMIN_ACCESS = {
+            "/rest/role/*"
 
-            "/rest/user",
-            "product/{id}",
-            "product/list"
-//            "product/search",
-//            "/rest/product/get-one",
-//            "/rest/order",
-//            "/rest/order/add-product-in-order",
-//            "/rest/product/search"
     };
 
     private static final String[] MANAGER_ACCESS = {
-
-            "/rest/product/**",
-            "/rest/order/**"
+ //           "/rest/user/deleted/*", "/rest/user/list", "/rest/user/get-one/*"
+//            , "/rest/user/update/*",
+//            "/rest/product/create", "/rest/product/update/*", "/rest/product/delete/*", "/rest/order/list", "/rest/order/deleted/*",
+//            "/rest/order/list", "/rest/role/list","/rest/delivery-order/update/*", "/rest/delivery-order/delete/*",
+//            "/rest/delivery-order/get-one/*", "/rest/delivery-order/list", "/rest/provider/update/*", "/rest/provider/create",
+            "/rest/provider/delete/*","/rest/provider/list", "/rest/provider/update/*","/rest/provider/get-one/*"
 
     };
-    private static final String[] ADMIN_ACCESS = {
-            "/rest/**"
+    private static final String[] USER_ACCESS = {
+//            "/rest/user/create", "/rest/product/get-one/*"
+//            , "/rest/product/search","/rest/order/create","/rest/order/get-one/*",
+//            "/rest/order/create-new-order",
+            "/rest/order/update/*"
     };
+
+
 
     @Bean
     public SecurityFilterChain filterChainJwt(HttpSecurity http) throws Exception {
@@ -90,14 +108,9 @@ public class JwtSecurityConfig
                                 ex.getMessage()
                         ))
                 .and().authorizeRequests()
-                .antMatchers("/rest/user/deleted/*", "/rest/user/list", "/rest/user/get-one/*", "/rest/user/update/*",
-                        "/rest/product/create", "/rest/product/update/*", "/rest/product/delete/*", "/rest/order/list", "/rest/order/deleted/*",
-                        "/rest/order/list", "/rest/role/list","/rest/delivery-order/update/*", "/rest/delivery-order/delete/*",
-                        "/rest/delivery-order/get-one/*", "/rest/delivery-order/list", "/rest/provider/update/*", "/rest/provider/create",
-                        "/rest/provider/delete/*","/rest/provider/list", "/rest/provider/update/*","/rest/provider/get-one/*",
-                        "/rest/role/*").hasAnyRole("ADMIN","MANAGER")
-                .antMatchers("/rest/user/create", "/rest/product/list", "/rest/product/get-one/*","/rest/product/search","/rest/order/create","/rest/order/get-one/*",
-                        "/rest/order/create-new-order", "/rest/order/update/*").hasAnyRole( "USER", "MANAGER", "ADMIN")
+                .antMatchers(ADMIN_ACCESS).hasAnyRole("ADMIN")
+                .antMatchers(MANAGER_ACCESS).hasAnyRole("ADMIN","MANAGER")
+                .antMatchers(USER_ACCESS).hasAnyRole( "USER", "MANAGER", "ADMIN")
 
                 .and()
                 //JWT Token VALID or NOT

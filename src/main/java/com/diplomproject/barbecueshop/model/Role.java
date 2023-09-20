@@ -26,8 +26,4 @@ public class Role {
     @Column(name = "description")
     private String description;
 
-   // public void setId(Long id) {
-   // }
-
-
 }
