@@ -40,12 +40,21 @@ public class CustomUserDetailsService implements UserDetailsService {
         } else {
             User user = userRepository.findUserByLoginAndDeletedFalse(username);
             List<GrantedAuthority> authorities = new ArrayList<>();
-            String role = switch (user.getRole().getId().intValue()){
-                case 1 -> "ROLE_ADMIN";
-                case 2 -> "ROLE_USER";
-                case 3 -> "ROLE_MANAGER";
-                default -> "UNKNOWN";
-            };
+            String role;
+            switch (user.getRole().getId().intValue()) {
+                case 1:
+                    role = "ROLE_ADMIN";
+                    break;
+                case 2:
+                    role = "ROLE_USER";
+                    break;
+                case 3:
+                    role = "ROLE_MANAGER";
+                    break;
+                default:
+                    role = "UNKNOWN";
+                    break;
+            }
             authorities.add(new SimpleGrantedAuthority(role));
             return new CustomUserDetails(user.getId().intValue(), username, user.getPassword(), authorities);
         }

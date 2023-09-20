@@ -27,10 +27,13 @@ public interface UserRepository extends GenericRepository<User> {
     User findByChangePasswordToken(String token);
 
     // high java 13
-    @Query(nativeQuery = true, value = """
-             select * from users where login = :login and is_deleted = false
-            """)
+//    @Query(nativeQuery = true, value = """
+//             select * from users where login = :login and is_deleted = false
+//            """)
 
+
+    @Query(nativeQuery = true, value = "  select * from users where login = :login and is_deleted = false\n")  //такой запрос работает в 11 версии java
+    User findUserByLoginAndIsDeletedFalse(@Param(value = "login") String login);
 
     //     @Query("SELECT n FROM User n WHERE n.login = :login AND n.isDeleted = false")
     User findUserByLoginAndDeletedFalse(@Param(value = "login") String login);
