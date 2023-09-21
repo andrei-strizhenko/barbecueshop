@@ -10,7 +10,6 @@
     </parent>
     <groupId>com.diplomproject</groupId>
     <artifactId>barbecueshop</artifactId>
-    <packaging>jar</packaging>
     <version>0.0.1-SNAPSHOT</version>
     <name>barbecueshop</name>
     <description>Demo project for Spring Boot</description>
