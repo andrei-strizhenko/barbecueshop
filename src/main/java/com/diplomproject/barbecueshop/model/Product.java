@@ -5,9 +5,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 
 @Entity
@@ -57,19 +55,19 @@ public class Product extends GenericModel {
     private List<Order> orders= new ArrayList<>();
 
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
-    //  @JsonIgnore // убирает рекурсию
-    @JoinTable(
-            name = "products_providers",
-            joinColumns = @JoinColumn(name = "product_id"),
-            foreignKey = @ForeignKey(name = "FK_PRODUCTS_PROVIDERS"),
-            inverseJoinColumns = @JoinColumn(name = "provider_id"),
-            inverseForeignKey = @ForeignKey(name = "FK_PROVIDERS_PRODUCTS"))
-    private Set<Provider> providers = new HashSet<>();
+//    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
+//    //  @JsonIgnore // убирает рекурсию
+//    @JoinTable(
+//            name = "products_providers",
+//            joinColumns = @JoinColumn(name = "product_id"),
+//            foreignKey = @ForeignKey(name = "FK_PRODUCTS_PROVIDERS"),
+//            inverseJoinColumns = @JoinColumn(name = "provider_id"),
+//            inverseForeignKey = @ForeignKey(name = "FK_PROVIDERS_PRODUCTS"))
+//    private Set<Provider> providers = new HashSet<>();
 
     @Builder
     public Product(Long id, String title, String description, double discount, double cost, List<Order> orders, String createdBy,
-                   Set<Provider> providers, String image, Long available, Long ordered) {
+                    String image, Long available, Long ordered) {
         super(id, createdBy);
         this.title = title;
         this.description = description;
@@ -78,7 +76,7 @@ public class Product extends GenericModel {
         this.image = image;
         this.available = available;
         this.ordered = ordered;
-        this.providers = providers;
+
         this.orders = orders;                     //выкл
     }
 
