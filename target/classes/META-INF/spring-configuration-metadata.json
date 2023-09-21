@@ -1,4 +1,5 @@
 {
+  "groups": [],
   "properties": [
     {
       "name": "server.http.interface",
@@ -6,18 +7,10 @@
       "description": "Description for server.http.interface."
     },
     {
-      "name": "server.http.interface",
-      "type": "java.lang.String",
-      "description": "Description for server.http.interface."
-    },
-    {
-      "name": "server.http.port",
-      "type": "java.lang.String",
-      "description": "Description for server.http.port."
-    },
-    {
       "name": "server.http.port",
       "type": "java.lang.String",
       "description": "Description for server.http.port."
     }
-  ] }
+  ],
+  "hints": []
+}

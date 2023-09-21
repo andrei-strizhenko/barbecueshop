@@ -7,6 +7,7 @@ com\diplomproject\barbecueshop\dto\UserDto.class
 com\diplomproject\barbecueshop\mapper\ProviderMapper.class
 com\diplomproject\barbecueshop\config\ModelMapperConfig.class
 com\diplomproject\barbecueshop\dto\ApplyOrderToDeliveryDto.class
+META-INF\spring-configuration-metadata.json
 com\diplomproject\barbecueshop\mapper\ProductWithOrderMapper.class
 com\diplomproject\barbecueshop\mapper\ProviderWithProductMapper.class
 com\diplomproject\barbecueshop\model\Order.class
