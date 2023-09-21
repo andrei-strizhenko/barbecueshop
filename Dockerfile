@@ -1,8 +1,37 @@
-FROM eclipse-temurin:17-jdk-alpine
-VOLUME /tmp
-COPY target/*.jar app.jar
-ENTRYPOINT ["java","-jar","/app.jar"]
+
+#
+# Build stage
+#
+FROM maven:3.6.2-jdk-13 AS build
+COPY . .
+RUN mvn clean package -Pprod -DskipTests
+
+#
+# Package stage
+#
+FROM openjdk:13-jdk-slim
+COPY --from=build /target/barbecueshop-0.0.1-SNAPSHOT.jar barbecueshop.jar
+# ENV PORT=8080
 EXPOSE 8080
+ENTRYPOINT ["java","-jar","barbecueshop.jar"]
+
+
+
+
+
+
+
+
+
+
+
+#FROM eclipse-temurin:17-jdk-alpine
+#VOLUME /tmp
+#COPY target/*.jar app.jar
+#ENTRYPOINT ["java","-jar","/app.jar"]
+#EXPOSE 8080
+
+
 
 
 
